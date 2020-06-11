@@ -5,7 +5,7 @@ Sequence variation among pathogens, even of a single amino acid, can expand thei
 
 ---
 ## **Quick Start**
-As with any typical tool, an input file would be required to deliver the output, with parameters user-defined for optimal outcome. The input would be a file containing a set of non-redundant (nr) protein sequences in the FASTA format. Sequences containing the unknown residue, X, maybe removed, if desired. Keeping them may result in a minimal set comprising of sequences with the unknown residue.
+As with any typical tool, an input file would be required to deliver the output, with user-defined parameters for optimal outcome. The input would be a file containing a set of non-redundant (nr) protein sequences in the FASTA format. Sequences containing the unknown residue, X, may be removed, if desired. Keeping them may result in a minimal set comprising of sequences with the unknown residue.
 
 Below we describe the algorithmic steps of the tool using a sample input file: 
 
