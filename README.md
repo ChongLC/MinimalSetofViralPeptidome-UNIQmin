@@ -6,11 +6,11 @@ Sequence variation among pathogens, even of a single amino acid, can expand thei
 Table of Contents
 ====================
 - [Quick Start](#quick-start)
-    + [Step 1: Generation of overlapping *k*-mers](#step-1--:--generation-of-overlapping--k--mers)
+    + [Step 1: Generation of overlapping *k*-mers](#step-1:-generation-of-overlapping--k--mers)
     + [Step 2: Frequency grouping of the generated overlapping *k*-mers](#step-2-:-frequency-grouping-of-the-generated-overlapping--k--mers)
-    + [Step 3: Identification of pre-selected minimal set of sequences](#step-3--:--identification-of-pre-selected-minimal-set-of-sequences)
-    + [Step 4: Omission of all *k*-mers cognate to the pre-qualified minimal set sequences](#step-4--omission-of-all--k--mers-cognate-to-the-pre-qualified-minimal-set-sequences)
-    + [Step 5: Identification of the minimal set of sequences](#step-5--identification-of-the-minimal-set-of-sequences)
+    + [Step 3: Identification of pre-selected minimal set of sequences](#step-3-:-identification-of-pre-selected-minimal-set-of-sequences)
+    + [Step 4: Omission of all *k*-mers cognate to the pre-qualified minimal set sequences](#step-4-:-omission-of-all--k--mers-cognate-to-the-pre-qualified-minimal-set-sequences)
+    + [Step 5: Identification of the minimal set of sequences](#step-5-:-identification-of-the-minimal-set-of-sequences)
 - [Figure Summary](#figure-summary)
 - [Stitch UNIQmin](#stitch-uniqmin)
 - [Citing Resources](#citing-resources)
