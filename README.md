@@ -3,14 +3,27 @@
 ### Brief Description
 Sequence variation among pathogens, even of a single amino acid, can expand their host repertoire or enhance the infection ability. Alignment independent approach represents an alternative approach to the study of pathogen diversity, which is devoid of the need for sequence conservation to perform comparative analyses. Herein, we present UNIQmin, a tool that utilises an alignment independent method to generate the minimal set of pathogen sequences, as a way to study their diversity, across any rank of taxonomic lineage. The minimal set refers to the smallest possible number of sequences required to capture the entire repertoire of pathogen peptidome diversity present in a sequence dataset.
 
+Table of Contents
+====================
+- [Quick Start](#quick-start)
+    + [Step 1: Generation of overlapping *k*-mers](#step-1--generation-of-overlapping--k--mers)
+    + [Step 2: Frequency grouping of the generated overlapping *k*-mers](#step-2--frequency-grouping-of-the-generated-overlapping--k--mers)
+    + [Step 3: Identification of pre-selected minimal set of sequences](#step-3--identification-of-pre-selected-minimal-set-of-sequences)
+    + [Step 4: Omission of all *k*-mers cognate to the pre-qualified minimal set sequences](#step-4--omission-of-all--k--mers-cognate-to-the-pre-qualified-minimal-set-sequences)
+    + [Step 5: Identification of the minimal set of sequences](#step-5--identification-of-the-minimal-set-of-sequences)
+- [Figure Summary](#figure-summary)
+- [Stitch UNIQmin](#stitch-uniqmin)
+- [Citing Resources](#citing-resources)
+
+
 ---
-## **Quick Start**
+## Quick Start
 As with any typical tool, an input file would be required to deliver the output, with user-defined parameters for optimal outcome. The input would be a file containing a set of non-redundant (nr) protein sequences in the FASTA format. Sequences containing the unknown residue, X, may be removed, if desired. Keeping them may result in a minimal set comprising of sequences with the unknown residue.
 
 Below we describe the algorithmic steps of the tool using a sample input file: 
 
 #### Step 1: Generation of overlapping *k*-mers 
-Use the sample non-redundant (nr) input file (*e.g.* NRParamyxoviridae.fas; referred to as *A*) to generate a set of defined overlapping *k*-mers (e.g. 9-mers; other *k*-mers length can also be defined) from each of the sequences in the input file (the *k*-mer set will be referred to as *B'*), by employing the "U1:KmerGenerator" script.
+Use the sample non-redundant (nr) input file (*e.g.* inputfile.fas; referred to as *A*) to generate a set of defined overlapping *k*-mers (e.g. 9-mers; other *k*-mers length can also be defined) from each of the sequences in the input file (the *k*-mer set will be referred to as *B'*), by employing the "U1:KmerGenerator" script.
 
 Note: In the script below, the number of CPU-cores set to be used for Step 1 is 14, which can be modified to user-defined numbers, provided that it is catered by the in-house resources.  
 ```
@@ -18,8 +31,8 @@ from Bio import SeqIO
 from concurrent.futures import ProcessPoolExecutor
 import math
 
-fileA = list(SeqIO.parse("NRParamyxoviridae.fas","fasta"))
-file_id = "Output_kmers_Paramyxoviridae.txt"
+fileA = list(SeqIO.parse("inputfile.fas","fasta"))
+file_id = "Output_kmers.txt"
 
 def generate_kmers(start, end):
 	for record in fileA[start:end]:
@@ -44,7 +57,7 @@ if __name__ == '__main__':
   	futures.append(pool.submit(generate_kmers, i * perCPUSize, (i+1) * perCPUSize))
 ```
 
-#### Step 2: Categorization of the generated overlapping *k*-mers
+#### Step 2: Frequency grouping of the generated overlapping *k*-mers
 Categorize the overlapping *k*-mers (file *B'*) according to the occurrence (frequency) count
 
 i) All single occurring *k*-mer peptides are deposited into a file (referred to as *B'1*) by use of the "U2.1:Singletons" script. 
@@ -52,7 +65,7 @@ i) All single occurring *k*-mer peptides are deposited into a file (referred to 
 from Bio import SeqIO
 import pandas as pd
 
-kmers = pd.read_csv("Output_kmers_Paramyxoviridae.txt", header=None)
+kmers = pd.read_csv("Output_kmers.txt", header=None)
 kmers.columns = ['kmer']
 kmers['freq'] = kmers.groupby('kmer')['kmer'].transform('count')
 
@@ -64,7 +77,9 @@ singleList.to_csv("seqSingleList.txt", index = False, header = False)
 
 ii) All multi-occurring *k*-mer peptides are deposited into a file (referred to as *B'2*) by use of the "U2.2:Multitons" script.
 ```
-kmers = pd.read_csv("Output_kmers_Paramyxoviridae.txt", header=None)
+import pandas as pd
+
+kmers = pd.read_csv("Output_kmers.txt", header=None)
 kmers.columns = ['kmer']
 kmers['freq'] = kmers.groupby('kmer')['kmer'].transform('count')
 
@@ -75,7 +90,7 @@ more1List = kmer_more1['kmer']
 more1List.to_csv("seqmore1List.txt", index = False, header = False)
 ```
 
-#### Step 3: Identification of pre-qualified minimal set sequences
+#### Step 3: Identification of pre-selected minimal set sequences
 i) Match all the single occurring *k*-mer peptides of *B'1* and all sequences of *A* to identify the sequences that captured each of the *k*-mer peptides, and such sequences of *A* are then subsequently deposited into a minimal set file, *Z*. This step is carried out by use of the "U3.1:PreQualifiedMinSet" script. 
 ```
 from Bio import SeqIO
@@ -115,7 +130,7 @@ def match_kmers(fasta_list, kmer_auto):
     logging.info("Completed")
 
 if __name__ == '__main__':
-    fasta_file = "cdhitParamyxoviridae"
+    fasta_file = "inputfile.fas"
     kmer_file = "seqSingleList.txt"
     output_file = "seqfileZ.txt"
 
@@ -128,6 +143,9 @@ if __name__ == '__main__':
 
 ii) Remove the sequences deposited into *Z* from file *A*, and thus, resulting in a new file, containing only the remaining sequences, referred to as *A#*. This step is carried out by use of the "U3.2:UnmatchedSingletons" script.
 ```
+from Bio import SeqIO
+
+fileA = list(SeqIO.parse("inputfile.fas","fasta"))
 header_set = set(line.strip() for line in open("seqfileZ.txt"))
 remainingSeq = open("remainingSeq.fasta","w")
 
@@ -138,7 +156,7 @@ for seq_record in fileA:
 		remainingSeq.write(seq_record.format("fasta"))
 remainingSeq.close()
 
-fasta_file = "cdhitParamyxoviridae" 
+fasta_file = "inputfile.fas" 
 wanted_file = "seqfileZ.txt" 
 result_file = "result_file.fasta" 
 
@@ -156,7 +174,7 @@ with open(result_file, "w") as f:
 			SeqIO.write([seq], f, "fasta")
 ```
 
-#### Step 4: Identification of pre-qualified minimal set sequences
+#### Step 4: Omission of all *k*-mers cognate to the pre-qualified minimal set sequences
 i) Remove the duplicates among the multi-occurring *k*-mer peptides in file *B'2*, which would result in a file comprising only a single copy of the multi-occurring *k*-mer peptides. This step is carried out by use of the "U4.1:Non-SingletonsDedup" script. 
 ```
 lines_seen = set()
@@ -253,7 +271,7 @@ with open(result, "w") as f:
     f.write(i)
 ```
 
-#### Step 5: Analysis of all remaining *k*-mers
+#### Step 5: Identification of the minimal set of sequences
 Match between the remaining unique, multi-occurring *k*-mers of *B#* and the remaining sequence of *A#*, and subsequently, identify the sequence with the maximal *k*-mers coverage, which are then deposited into the earlier defined file *Z* (minimal set). The deposited sequences in file *Z* and their inherent *k*-mers are removed from file *A#* and file *B#*, respectively. This process is repeated until the *k*-mers in the file *B#* are exhausted. This step is carried out by use of the "U5:RemainingMinSet" script. 
 ```
 from Bio import SeqIO
@@ -317,4 +335,34 @@ while(len(remain_kmer) != 0):
 <img src="Summary_v1.png" width="640" height="1075">
 
 ---
-## **Citing resources**
+## Stitch UNIQmin
+```
+#!/bin/bash
+#$ -V
+
+dir=/backup/user/ext/perdana/lichuin/cdhitObj2/testingStitchScript/ #path of your directory
+cd $dir
+python p1.py
+wait 
+python p2.py
+wait
+python p2_2.py
+wait
+python p3.py
+wait 
+python p3_2.py
+wait 
+python p4_1.py
+wait 
+python p4_2.py
+wait 
+python p4_3.py
+wait
+cp seqfileZ.txt fileZ.txt
+mkdir match
+wait 
+python p5.py
+```
+
+---
+## Citing Resources
