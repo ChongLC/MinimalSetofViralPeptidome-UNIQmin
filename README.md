@@ -23,7 +23,7 @@ As with any typical tool, an input file would be required to deliver the output,
 Below we describe the algorithmic steps of the tool using a sample input file: 
 
 #### Step 1: Generation of overlapping *k*-mers 
-Use the sample non-redundant (nr) input file (*e.g.* inputfile.fas; referred to as *A*) to generate a set of defined overlapping *k*-mers (e.g. 9-mers; other *k*-mers length can also be defined) from each of the sequences in the input file (the *k*-mer set will be referred to as *B'*), by employing the "U1:KmerGenerator" script.
+Use the sample non-redundant (nr) input file (*e.g.* inputfile.fas; referred to as *A*) to generate a set of defined overlapping *k*-mers (e.g. 9-mers; other *k*-mers length can also be defined) from each of the sequences in the input file (the *k*-mer set will be referred to as *B'*), by employing the "U1_KmerGenerator" script.
 
 Note: In the script below, the number of CPU-cores set to be used for Step 1 is 14, which can be modified to user-defined numbers, provided that it is catered by the in-house resources.  
 ```
@@ -60,7 +60,7 @@ if __name__ == '__main__':
 #### Step 2: Frequency grouping of the generated overlapping *k*-mers
 Categorize the overlapping *k*-mers (file *B'*) according to the occurrence (frequency) count
 
-i) All single occurring *k*-mer peptides are deposited into a file (referred to as *B'1*) by use of the "U2.1:Singletons" script. 
+i) All single occurring *k*-mer peptides are deposited into a file (referred to as *B'1*) by use of the "U2.1_Singletons" script. 
 ```
 from Bio import SeqIO
 import pandas as pd
@@ -75,7 +75,7 @@ singleList = kmer_1['kmer']
 singleList.to_csv("seqSingleList.txt", index = False, header = False)
 ```
 
-ii) All multi-occurring *k*-mer peptides are deposited into a file (referred to as *B'2*) by use of the "U2.2:Multitons" script.
+ii) All multi-occurring *k*-mer peptides are deposited into a file (referred to as *B'2*) by use of the "U2.2_Multitons" script.
 ```
 import pandas as pd
 
@@ -91,7 +91,7 @@ more1List.to_csv("seqmore1List.txt", index = False, header = False)
 ```
 
 #### Step 3: Identification of pre-selected minimal set sequences
-i) Match all the single occurring *k*-mer peptides of *B'1* and all sequences of *A* to identify the sequences that captured each of the *k*-mer peptides, and such sequences of *A* are then subsequently deposited into a minimal set file, *Z*. This step is carried out by use of the "U3.1:PreQualifiedMinSet" script. 
+i) Match all the single occurring *k*-mer peptides of *B'1* and all sequences of *A* to identify the sequences that captured each of the *k*-mer peptides, and such sequences of *A* are then subsequently deposited into a minimal set file, *Z*. This step is carried out by use of the "U3.1_PreQualifiedMinSet" script. 
 ```
 from Bio import SeqIO
 import ahocorasick
@@ -141,7 +141,7 @@ if __name__ == '__main__':
     match_kmers(fasta_list, kmer_auto)
 ```
 
-ii) Remove the sequences deposited into *Z* from file *A*, and thus, resulting in a new file, containing only the remaining sequences, referred to as *A#*. This step is carried out by use of the "U3.2:UnmatchedSingletons" script.
+ii) Remove the sequences deposited into *Z* from file *A*, and thus, resulting in a new file, containing only the remaining sequences, referred to as *A#*. This step is carried out by use of the "U3.2_UnmatchedSingletons" script.
 ```
 from Bio import SeqIO
 
@@ -175,7 +175,7 @@ with open(result_file, "w") as f:
 ```
 
 #### Step 4: Omission of all *k*-mers cognate to the pre-qualified minimal set sequences
-i) Remove the duplicates among the multi-occurring *k*-mer peptides in file *B'2*, which would result in a file comprising only a single copy of the multi-occurring *k*-mer peptides. This step is carried out by use of the "U4.1:Non-SingletonsDedup" script. 
+i) Remove the duplicates among the multi-occurring *k*-mer peptides in file *B'2*, which would result in a file comprising only a single copy of the multi-occurring *k*-mer peptides. This step is carried out by use of the "U4.1_Non-SingletonsDedup" script. 
 ```
 lines_seen = set()
 outfile = open("nr_more1List.txt","w")
@@ -186,7 +186,7 @@ for line in open("seqmore1List.txt","r"):
 outfile.close()
 ```
 
-ii) Identify the unique, multi-occurring *k*-mers that matched the pre-qualified minimal set sequences in *Z*. This step is carried out by use of the "U4.2:Multi-OccurringPreMinSet" script.
+ii) Identify the unique, multi-occurring *k*-mers that matched the pre-qualified minimal set sequences in *Z*. This step is carried out by use of the "U4.2_Multi-OccurringPreMinSet" script.
 ```
 from Bio import SeqIO
 import ahocorasick
@@ -236,7 +236,7 @@ if __name__ == '__main__':
 	match_kmers(fasta_list, kmer_auto)
 ```
 
-iii) Remove the matched unique, multi-occurring *k*-mer peptides, which would result in a new file (referred to as *B#*). This step is carried out by use of the "U4.3:UnmatchedMulti-Occurring" script. 
+iii) Remove the matched unique, multi-occurring *k*-mer peptides, which would result in a new file (referred to as *B#*). This step is carried out by use of the "U4.3_UnmatchedMulti-Occurring" script. 
 ```
 import ast
 import itertools
@@ -272,7 +272,7 @@ with open(result, "w") as f:
 ```
 
 #### Step 5: Identification of the minimal set of sequences
-Match between the remaining unique, multi-occurring *k*-mers of *B#* and the remaining sequence of *A#*, and subsequently, identify the sequence with the maximal *k*-mers coverage, which are then deposited into the earlier defined file *Z* (minimal set). The deposited sequences in file *Z* and their inherent *k*-mers are removed from file *A#* and file *B#*, respectively. This process is repeated until the *k*-mers in the file *B#* are exhausted. This step is carried out by use of the "U5:RemainingMinSet" script. 
+Match between the remaining unique, multi-occurring *k*-mers of *B#* and the remaining sequence of *A#*, and subsequently, identify the sequence with the maximal *k*-mers coverage, which are then deposited into the earlier defined file *Z* (minimal set). The deposited sequences in file *Z* and their inherent *k*-mers are removed from file *A#* and file *B#*, respectively. This process is repeated until the *k*-mers in the file *B#* are exhausted. This step is carried out by use of the "U5_RemainingMinSet" script. 
 ```
 from Bio import SeqIO
 import pandas as pd 
