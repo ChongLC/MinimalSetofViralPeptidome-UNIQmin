@@ -342,26 +342,26 @@ while(len(remain_kmer) != 0):
 
 dir=/backup/user/ext/perdana/lichuin/cdhitObj2/testingStitchScript/ #path of your directory
 cd $dir
-python p1.py
+python U1_KmerGenerator.py
 wait 
-python p2.py
+python U2.1_Singletons.py
 wait
-python p2_2.py
+python U2.2_Multitons.py
 wait
-python p3.py
+python U3.1_PreQualifiedMinSet.py
 wait 
-python p3_2.py
+python U3.2_UnmatchedSingletons.py
 wait 
-python p4_1.py
+python U4.1_Non-SingletonsDedup.py
 wait 
-python p4_2.py
+python U4.2_Multi-OccurringPreMinSet.py
 wait 
-python p4_3.py
+python U4.3_UnmatchedMulti-Occurring.py
 wait
 cp seqfileZ.txt fileZ.txt
 mkdir match
 wait 
-python p5.py
+python U5_RemainingMinSet.py
 ```
 
 ---
