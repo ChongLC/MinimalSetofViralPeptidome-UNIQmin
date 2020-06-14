@@ -332,7 +332,7 @@ while(len(remain_kmer) != 0):
 ```
 ---
 ## Figure Summary
-<img src="Summary_v1.png" width="640" height="1075">
+<img src="Summary.png" width="640" height="1075">
 
 ---
 ## Stitch UNIQmin
