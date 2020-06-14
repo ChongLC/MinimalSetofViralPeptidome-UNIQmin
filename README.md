@@ -22,7 +22,7 @@ As with any typical tool, an input file would be required to deliver the output,
 
 Below we describe the algorithmic steps of the tool using a sample input file: 
 
-### Step 1: Generation of overlapping *k*-mers 
+## Step 1: Generation of overlapping *k*-mers 
 Use the sample non-redundant (nr) input file (*e.g.* inputfile.fas; referred to as *A*) to generate a set of defined overlapping *k*-mers (e.g. 9-mers; other *k*-mers length can also be defined) from each of the sequences in the input file (the *k*-mer set will be referred to as *B'*), by employing the "U1:KmerGenerator" script.
 
 Note: In the script below, the number of CPU-cores set to be used for Step 1 is 14, which can be modified to user-defined numbers, provided that it is catered by the in-house resources.  
