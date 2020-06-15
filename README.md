@@ -6,7 +6,7 @@ Sequence variation among pathogens, even of a single amino acid, can expand thei
 Table of Contents
 ====================
 - [Quick Start](#quick-start)
-    + [Step 1: Generation of overlapping *k*-mers](#generation-of-overlapping-*k*-mers)
+    + [Step 1: Generation of overlapping *k*-mers](#step-1-:-generation-of-overlapping--k--mers)
     + [Step 2: Frequency grouping of the generated overlapping *k*-mers](#step-2-:-frequency-grouping-of-the-generated-overlapping--k--mers)
     + [Step 3: Identification of pre-selected minimal set of sequences](#step-3-:-identification-of-pre-selected-minimal-set-of-sequences)
     + [Step 4: Omission of all *k*-mers cognate to the pre-qualified minimal set sequences](#step-4-:-omission-of-all--k--mers-cognate-to-the-pre-qualified-minimal-set-sequences)
@@ -22,7 +22,7 @@ As with any typical tool, an input file would be required to deliver the output,
 
 Below we describe the algorithmic steps of the tool using a sample input file: 
 
-#### Generation of overlapping *k*-mers
+#### Step 1: Generation of overlapping *k*-mers
 Use the sample non-redundant (nr) input file (*e.g.* inputfile.fas; referred to as *A*) to generate a set of defined overlapping *k*-mers (e.g. 9-mers; other *k*-mers length can also be defined) from each of the sequences in the input file (the *k*-mer set will be referred to as *B'*), by employing the "U1_KmerGenerator" script.
 
 Note: In the script below, the number of CPU-cores set to be used for Step 1 is 14, which can be modified to user-defined numbers, provided that it is catered by the in-house resources.  
