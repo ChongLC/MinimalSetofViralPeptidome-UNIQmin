@@ -6,7 +6,7 @@ Sequence variation among pathogens, even of a single amino acid, can expand thei
 Table of Contents
 ====================
 - [Quick Start](#quick-start)
-    + [Step 1: Generation of overlapping *k*-mers](#step-1-:-generation-of-overlapping--k--mers)
+    + [Step 1: Generation of overlapping *k*-mers](#step-1-generation-of-overlapping-k-mers)
     + [Step 2: Frequency grouping of the generated overlapping *k*-mers](#step-2-:-frequency-grouping-of-the-generated-overlapping--k--mers)
     + [Step 3: Identification of pre-selected minimal set of sequences](#step-3-:-identification-of-pre-selected-minimal-set-of-sequences)
     + [Step 4: Omission of all *k*-mers cognate to the pre-qualified minimal set sequences](#step-4-:-omission-of-all--k--mers-cognate-to-the-pre-qualified-minimal-set-sequences)
@@ -22,7 +22,7 @@ As with any typical tool, an input file would be required to deliver the output,
 
 Below we describe the algorithmic steps of the tool using a sample input file: 
 
-#### Step 1: Generation of overlapping *k*-mers
+#### Step 1 Generation of overlapping k-mers
 Use the sample non-redundant (nr) input file (*e.g.* inputfile.fas; referred to as *A*) to generate a set of defined overlapping *k*-mers (e.g. 9-mers; other *k*-mers length can also be defined) from each of the sequences in the input file (the *k*-mer set will be referred to as *B'*), by employing the "U1_KmerGenerator" script.
 
 Note: In the script below, the number of CPU-cores set to be used for Step 1 is 14, which can be modified to user-defined numbers, provided that it is catered by the in-house resources.  
@@ -272,7 +272,7 @@ with open(result, "w") as f:
 ```
 
 #### Step 5: Identification of the minimal set of sequences
-Match between the remaining unique, multi-occurring *k*-mers of *B#* and the remaining sequence of *A#*, and subsequently, identify the sequence with the maximal *k*-mers coverage, which are then deposited into the earlier defined file *Z* (minimal set). The deposited sequences in file *Z* and their inherent *k*-mers are removed from file *A#* and file *B#*, respectively. This process is repeated until the *k*-mers in the file *B#* are exhausted. This step is carried out by use of the "U5_RemainingMinSet" script. 
+Match between the remaining unique, multi-occurring *k*-mers of *B#* and the remaining sequence of *A#*, and subsequently, identify the sequence with the maximal *k*-mers coverage, which are then deposited into the earlier defined file *Z* (minimal set). The deposited sequences in file *Z* and their inherent *k*-mers are removed from file *A#* and file *B#*, respectively. This process is repeated until the *k*-mers in the file *B#* are exhausted. This step is carried out by use of the "U5_RemainingMinSet" script. The output of the sample input file (inputfile.fas) is provided as an example (exampleoutput.txt). 
 ```
 from Bio import SeqIO
 import pandas as pd 
@@ -335,7 +335,8 @@ while(len(remain_kmer) != 0):
 <img src="Summary.png" width="640" height="1075">
 
 ---
-## Stitch UNIQmin
+## UNIQmin as A Pipeline
+<add description - order & environment requirement>
 ```
 #!/bin/bash
 #$ -V
