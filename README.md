@@ -7,12 +7,12 @@ Table of Contents
 ====================
 - [Quick Start](#quick-start)
     + [Step 1: Generation of overlapping *k*-mers](#step-1---generation-of-overlapping-k-mers)
-    + [Step 2: Frequency grouping of the generated overlapping *k*-mers](#step-2-:-frequency-grouping-of-the-generated-overlapping--k--mers)
-    + [Step 3: Identification of pre-selected minimal set of sequences](#step-3-:-identification-of-pre-selected-minimal-set-of-sequences)
-    + [Step 4: Omission of all *k*-mers cognate to the pre-qualified minimal set sequences](#step-4-:-omission-of-all--k--mers-cognate-to-the-pre-qualified-minimal-set-sequences)
-    + [Step 5: Identification of the minimal set of sequences](#step-5-:-identification-of-the-minimal-set-of-sequences)
+    + [Step 2: Frequency grouping of the generated overlapping *k*-mers](#step-2---frequency-grouping-of-the-generated-overlapping-k-mers)
+    + [Step 3: Identification of pre-selected minimal set of sequences](#step-3---identification-of-pre-selected-minimal-set-of-sequences)
+    + [Step 4: Omission of all *k*-mers cognate to the pre-qualified minimal set sequences](#step-4---omission-of-all-k-mers-cognate-to-the-pre-qualified-minimal-set-sequences)
+    + [Step 5: Identification of the minimal set of sequences](#step-5---identification-of-the-minimal-set-of-sequences)
 - [Figure Summary](#figure-summary)
-- [Stitch UNIQmin](#stitch-uniqmin)
+- [UNIQmin as a Pipeline](#uniqmin-as-a-pipeline)
 - [Citing Resources](#citing-resources)
 
 
@@ -57,7 +57,7 @@ if __name__ == '__main__':
   	futures.append(pool.submit(generate_kmers, i * perCPUSize, (i+1) * perCPUSize))
 ```
 
-#### Step 2: Frequency grouping of the generated overlapping *k*-mers
+#### Step 2 - Frequency grouping of the generated overlapping k-mers
 Categorize the overlapping *k*-mers (file *B'*) according to the occurrence (frequency) count
 
 i) All single occurring *k*-mer peptides are deposited into a file (referred to as *B'1*) by use of the "U2.1_Singletons" script. 
@@ -90,7 +90,7 @@ more1List = kmer_more1['kmer']
 more1List.to_csv("seqmore1List.txt", index = False, header = False)
 ```
 
-#### Step 3: Identification of pre-selected minimal set sequences
+#### Step 3 - Identification of pre-selected minimal set sequences
 i) Match all the single occurring *k*-mer peptides of *B'1* and all sequences of *A* to identify the sequences that captured each of the *k*-mer peptides, and such sequences of *A* are then subsequently deposited into a minimal set file, *Z*. This step is carried out by use of the "U3.1_PreQualifiedMinSet" script. 
 ```
 from Bio import SeqIO
@@ -174,7 +174,7 @@ with open(result_file, "w") as f:
 			SeqIO.write([seq], f, "fasta")
 ```
 
-#### Step 4: Omission of all *k*-mers cognate to the pre-qualified minimal set sequences
+#### Step 4 - Omission of all k-mers cognate to the pre-qualified minimal set sequences
 i) Remove the duplicates among the multi-occurring *k*-mer peptides in file *B'2*, which would result in a file comprising only a single copy of the multi-occurring *k*-mer peptides. This step is carried out by use of the "U4.1_Non-SingletonsDedup" script. 
 ```
 lines_seen = set()
@@ -271,7 +271,7 @@ with open(result, "w") as f:
     f.write(i)
 ```
 
-#### Step 5: Identification of the minimal set of sequences
+#### Step 5 - Identification of the minimal set of sequences
 Match between the remaining unique, multi-occurring *k*-mers of *B#* and the remaining sequence of *A#*, and subsequently, identify the sequence with the maximal *k*-mers coverage, which are then deposited into the earlier defined file *Z* (minimal set). The deposited sequences in file *Z* and their inherent *k*-mers are removed from file *A#* and file *B#*, respectively. This process is repeated until the *k*-mers in the file *B#* are exhausted. This step is carried out by use of the "U5_RemainingMinSet" script. The output of the sample input file (inputfile.fas) is provided as an example (exampleoutput.txt). 
 ```
 from Bio import SeqIO
@@ -335,7 +335,7 @@ while(len(remain_kmer) != 0):
 <img src="Summary.png" width="640" height="1075">
 
 ---
-## UNIQmin as A Pipeline
+## UNIQmin as a Pipeline
 <add description - order & environment requirement>
 ```
 #!/bin/bash
