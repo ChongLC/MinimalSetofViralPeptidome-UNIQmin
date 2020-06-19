@@ -310,6 +310,13 @@ while(len(remain_kmer) != 0):
             y = find_matching(remain_Seq[index].seq, A)
             z = len(y)
             f.write(x + ';' + str(y) + ';' + str(z) + '\n')
+	    if z == 0:
+                for i in range(len(remain_Seq_copy)):
+                    if remain_Seq_copy[i].id == x:
+                        del remain_Seq_copy[i]
+                        break                
+    
+    remain_Seq = remain_Seq_copy.copy()
     
     # read matching file and sorted by descending & some cleaning
     df = pd.read_csv(matching_file, delimiter=';', names=['sequence_id', 'matched_kmer', 'count']).sort_values(by='count',ascending=False, kind='mergesort')
