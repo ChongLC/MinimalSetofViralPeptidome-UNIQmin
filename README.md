@@ -318,19 +318,15 @@ while(len(remain_kmer) != 0):
     
     remain_Seq = remain_Seq_copy.copy()
     
-    # read matching file and sorted by descending & some cleaning
     df = pd.read_csv(matching_file, delimiter=';', names=['sequence_id', 'matched_kmer', 'count']).sort_values(by='count',ascending=False, kind='mergesort')
     df['matched_kmer'] = df['matched_kmer'].str.replace(r"\[|\]|'","")
     
-    # save highest count id to file
-    fileZ = open('fileZ.txt', 'a')
+    fileZ = open('fileZ.txt', 'a') # file Z is an example for output (exampleoutput.txt)
     fileZ.write(df['sequence_id'].iloc[0] + '\n')
     
-    # remove highest count kmer
     kmer_to_remove = df['matched_kmer'].iloc[0].split(', ')
     remain_kmer = list(set(remain_kmer) - set(kmer_to_remove))
     
-    # save remain kmer to file
     with open(remain_kmer_file, 'w') as f:
      for i in remain_kmer:
          f.write(i + '\n')
@@ -343,7 +339,7 @@ while(len(remain_kmer) != 0):
 
 ---
 ## UNIQmin as a Pipeline
-<add description - order & environment requirement>
+As explained above, UNIQmin comprises of five steps with respective python scripts employed according to the order of step. The sample input file (inputfile.fas) and example output (exampleoutput.txt) are provided. 
 ```
 #!/bin/bash
 #$ -V
