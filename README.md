@@ -31,7 +31,7 @@ from Bio import SeqIO
 from concurrent.futures import ProcessPoolExecutor
 import math
 
-fileA = list(SeqIO.parse("inputfile.fas","fasta"))
+fileA = list(SeqIO.parse("inputfile.fas","fasta")) #inputfile.fas is a sample input file. 
 file_id = "Output_kmers.txt"
 
 def generate_kmers(start, end):
@@ -130,7 +130,7 @@ def match_kmers(fasta_list, kmer_auto):
     logging.info("Completed")
 
 if __name__ == '__main__':
-    fasta_file = "inputfile.fas"
+    fasta_file = "inputfile.fas" #inputfile.fas is a sample input file.
     kmer_file = "seqSingleList.txt"
     output_file = "seqfileZ.txt"
 
@@ -145,7 +145,7 @@ ii) Remove the sequences deposited into *Z* from file *A*, and thus, resulting i
 ```
 from Bio import SeqIO
 
-fileA = list(SeqIO.parse("inputfile.fas","fasta"))
+fileA = list(SeqIO.parse("inputfile.fas","fasta")) #inputfile.fas is a sample input file.
 header_set = set(line.strip() for line in open("seqfileZ.txt"))
 remainingSeq = open("remainingSeq.fasta","w")
 
@@ -156,7 +156,7 @@ for seq_record in fileA:
 		remainingSeq.write(seq_record.format("fasta"))
 remainingSeq.close()
 
-fasta_file = "inputfile.fas" 
+fasta_file = "inputfile.fas" #inputfile.fas is a sample input file.
 wanted_file = "seqfileZ.txt" 
 result_file = "result_file.fasta" 
 
@@ -339,7 +339,7 @@ while(len(remain_kmer) != 0):
 
 ---
 ## UNIQmin as a Pipeline
-As explained above, UNIQmin comprises of five steps with respective python scripts employed according to the order of step. The sample input file (inputfile.fas) and example output (exampleoutput.txt) are provided. 
+As explained above, UNIQmin comprises of five steps with respective python scripts employed according to the order of step (server specs: Intel(R) Xeon(R) E5-2690 v2 @ 3.00GHz 40-core processors, 396 GB of RAM and 44 TB of local storage. The sample input file (inputfile.fas) and example output (exampleoutput.txt) are provided. 
 ```
 #!/bin/bash
 #$ -V
