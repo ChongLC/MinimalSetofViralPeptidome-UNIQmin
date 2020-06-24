@@ -62,7 +62,6 @@ Categorize the overlapping *k*-mers (file *B'*) according to the occurrence (fre
 
 i) All single occurring *k*-mer peptides are deposited into a file (referred to as *B'1*) by use of the "U2.1_Singletons" script. 
 ```
-from Bio import SeqIO
 import pandas as pd
 
 kmers = pd.read_csv("Output_kmers.txt", header=None)
@@ -280,6 +279,7 @@ import ahocorasick as ahc
 
 remain_Seq = list(SeqIO.parse("remainingSeq.fasta","fasta"))
 remain_kmer = [line.rstrip('\n') for line in open ("remainingKmer.txt")]
+remain_Seq_copy = remain_Seq.copy()
 
 def make_automaton(kmer_list):
     A = ahc.Automaton()  
