@@ -271,7 +271,7 @@ with open(result, "w") as f:
 ```
 
 #### Step 5 - Identification of the final minimal set of sequences
-Match between the remaining unique, multi-occurring *k*-mers of *B#* and the remaining sequence of *A#*, and subsequently, identify the sequence with the maximal *k*-mers coverage, which are then deposited into the earlier defined file *Z* (minimal set). The deposited sequences in file *Z* and their inherent *k*-mers are removed from file *A#* and file *B#*, respectively. This process is repeated until the *k*-mers in the file *B#* are exhausted. This step is carried out by use of the "U5_RemainingMinSet" script. The output of the sample input file (inputfile.fas) is provided as an example (exampleoutput.txt). 
+Match between the remaining unique, multi-occurring *k*-mers of *B#* and the remaining sequence of *A#*, and subsequently, identify the sequence with the maximal *k*-mers coverage, which are then deposited into the earlier defined file *Z* (minimal set). The deposited sequences in file *Z* and their inherent *k*-mers are removed from file *A#* and file *B#*, respectively. This process is repeated until the *k*-mers in the file *B#* are exhausted. This step is carried out by use of the "U5.1_RemainingMinSet" and "U5.2_MinSet" scripts. The output of the sample input file (inputfile.fas) is provided as an example (exampleoutput.txt). 
 ```
 from Bio import SeqIO
 import pandas as pd 
@@ -333,6 +333,26 @@ while(len(remain_kmer) != 0):
          
     a = a + 1
 ```
+```
+from Bio import SeqIO
+
+fasta_file = "inputfile.fas" # Input fasta file
+wanted_file = "fileZ.txt" # Input interesting sequence IDs, one per line
+result_file = "FileZ.fasta" # Output fasta file
+
+wanted = set()
+with open (wanted_file) as f: 
+  for line in f: 
+    line = line.strip()
+    if line != "":
+      wanted.add(line)
+
+fasta_sequences = SeqIO.parse(open(fasta_file),'fasta')
+with open (result_file, "w") as f: 
+  for seq in fasta_sequences: 
+    if seq.id in wanted: 
+      SeqIO.write([seq], f, "fasta")
+```
 ---
 ## Figure Summary
 <img src="Summary.png" width="640" height="1075">
@@ -365,7 +385,9 @@ wait
 cp seqfileZ.txt fileZ.txt
 mkdir match
 wait 
-python U5_RemainingMinSet.py
+python U5.1_RemainingMinSet.py
+wait
+python U5.2_MinSet.py
 ```
 
 ---
