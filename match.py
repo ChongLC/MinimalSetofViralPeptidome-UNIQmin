@@ -123,9 +123,8 @@ class RemainingMinSet:
             found_kmers.append(kmer)
         return found_kmers
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
 
-def main_match():
     #--------#
     # U1     #
     #--------#

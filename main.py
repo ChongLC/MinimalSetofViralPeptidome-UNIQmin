@@ -15,6 +15,8 @@ import time
 #--------#
 
 def generate_kmers(start, end):
+    fileA = list(SeqIO.parse(sys.argv[1],"fasta"))
+    file_id = "Output_kmers.txt"
     for record in fileA[start:end]:
         nr_sequence = record.seq
         seq_len = len(nr_sequence)
@@ -41,7 +43,7 @@ class PreQualifiedMinSet:
         kmer_list = [line.rstrip('\n') for line in open(kmer_file)]
         return fasta_list, kmer_list
 
-    def __find_match(self, line, A):
+    def _find_match(self, line, A):
         found_kmers = []
         for end_index, kmer in A.iter(line):
             found_kmers.append(kmer)
@@ -58,9 +60,10 @@ class PreQualifiedMinSet:
 
     def match_kmers(self, fasta_list, kmer_auto):
         logging.info("Writing output")
+        output_file = "seqfileZ.txt"
         with open(output_file,"w") as f:
             for record in fasta_list:
-                match = self.__find_match(str(record.seq), kmer_auto)
+                match = self._find_match(str(record.seq), kmer_auto)
                 if match:
                     line = record.id + "\n"
                     f.write(line)
@@ -79,7 +82,7 @@ class MultiOccurringPreMinSet:
         kmer_list = [line.rstrip('\n') for line in open (kmer_file)]
         return fasta_list, kmer_list
 
-    def __find_match_multi(self, line, A):
+    def _find_match_multi(self, line, A):
         found_kmers = []
         for end_index, kmer in A.iter(line):
             found_kmers.append(kmer)
@@ -96,9 +99,10 @@ class MultiOccurringPreMinSet:
 
     def match_kmers_multi(self, fasta_list, kmer_auto):
         logging.info("Writing output")
+        output_file = "matchKmer4CleanKmer.txt"
         with open(output_file, "w") as f:
             for record in fasta_list:
-                match = self.__find_match_multi(str(record.seq), kmer_auto)
+                match = self._find_match_multi(str(record.seq), kmer_auto)
                 if match:
                     line = str(match) + "\n"
                     f.write(line)
@@ -124,15 +128,14 @@ class RemainingMinSet:
         return found_kmers
 
 def main():
-
     #--------#
     # U1     #
     #--------#
 
     fileA = list(SeqIO.parse(sys.argv[1],"fasta"))
     file_id = "Output_kmers.txt"
-    open(file_id, 'a').close()
-
+    # open(file_id, 'a').close()
+    
     n = len(fileA)
     pool = ProcessPoolExecutor(int(sys.argv[3]))
     futures = []
@@ -178,7 +181,7 @@ def main():
 
     fasta_file = sys.argv[1]
     kmer_file = "seqSingleList.txt"
-    output_file = "seqfileZ.txt"
+    # output_file = "seqfileZ.txt"
 
     logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
@@ -238,7 +241,7 @@ def main():
 
     fasta_file = "result_file.fasta"
     kmer_file = "nr_more1List.txt"
-    output_file = "matchKmer4CleanKmer.txt"
+    # output_file = "matchKmer4CleanKmer.txt"
 
     logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
@@ -358,5 +361,9 @@ def main():
             if seq.id in wanted: 
                 SeqIO.write([seq], f, "fasta")
 
+    print("All process completed!")
+
 if __name__ == '__main__':
-    main()
+    main()    
+
+
