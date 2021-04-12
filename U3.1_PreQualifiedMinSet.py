@@ -1,3 +1,4 @@
+import sys
 from Bio import SeqIO
 import ahocorasick
 import logging
@@ -36,7 +37,7 @@ def match_kmers(fasta_list, kmer_auto):
 
 if __name__ == '__main__':
 
-    fasta_file = "cdhitCoronaviridae"
+    fasta_file = sys.argv[1]
     kmer_file = "seqSingleList.txt"
     output_file = "seqfileZ.txt"
 
