@@ -1,14 +1,9 @@
 from Bio import SeqIO
 import pandas as pd 
 import ahocorasick as ahc
-import os
-
-os.system('cp seqfileZ.txt fileZ.txt')
-os.mkdir('match')
 
 remain_Seq = list(SeqIO.parse("remainingSeq.fasta","fasta"))
 remain_kmer = [line.rstrip('\n') for line in open ("remainingKmer.txt")]
-remain_Seq_copy = remain_Seq.copy()
 
 def make_automaton(kmer_list):
     A = ahc.Automaton()  
@@ -39,7 +34,7 @@ while(len(remain_kmer) != 0):
             y = find_matching(remain_Seq[index].seq, A)
             z = len(y)
             f.write(x + ';' + str(y) + ';' + str(z) + '\n')
-            if z == 0:
+			if z == 0:
                 for i in range(len(remain_Seq_copy)):
                     if remain_Seq_copy[i].id == x:
                         del remain_Seq_copy[i]

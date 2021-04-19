@@ -1,7 +1,6 @@
-import sys
 from Bio import SeqIO
 
-fasta_file =  sys.argv[1] # Input fasta file
+fasta_file = "inputfile.fas" # Input fasta file
 wanted_file = "fileZ.txt" # Input interesting sequence IDs, one per line
 result_file = "FileZ.fasta" # Output fasta file
 
