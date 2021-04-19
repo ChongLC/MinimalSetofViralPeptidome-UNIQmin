@@ -1,0 +1,14 @@
+match
+Clean_lines.txt
+FileZ.fasta
+fileZ.txt
+fullList.txt
+matchKmer4CleanKmer.txt
+nr_more1List.txt
+Output_kmers.txt
+remainingKmer.txt
+remainingSeq.fasta
+result_file.fasta
+seqfileZ.txt
+seqmore1List.txt
+seqSingleList.txt
