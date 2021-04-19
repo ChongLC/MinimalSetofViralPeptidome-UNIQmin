@@ -1,16 +1,15 @@
-import sys
 from Bio import SeqIO
 from concurrent.futures import ProcessPoolExecutor
 import math
 
-fileA = list(SeqIO.parse(sys.argv[1],"fasta"))
+fileA = list(SeqIO.parse("cdhitCoronaviridae","fasta"))
 file_id = "Output_kmers.txt"
 
 def generate_kmers(start, end):
 	for record in fileA[start:end]:
 		nr_sequence = record.seq
 		seq_len = len(nr_sequence)
-		kmer = int(sys.argv[2])
+		kmer = 9
 		count = 0
 		temp = []
 		for seq in list(range(seq_len-(kmer-1))):
@@ -22,8 +21,8 @@ def generate_kmers(start, end):
 
 if __name__ == '__main__':
   n = len(fileA)
-  pool = ProcessPoolExecutor(int(sys.argv[3]))
+  pool = ProcessPoolExecutor(12)
   futures = []
-  perCPUSize = math.ceil(n/int(sys.argv[3]))
-  for i in range(0,int(sys.argv[3])):
+  perCPUSize = math.ceil(n/12)
+  for i in range(0,12):
   	futures.append(pool.submit(generate_kmers, i * perCPUSize, (i+1) * perCPUSize))

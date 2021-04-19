@@ -2,20 +2,20 @@ from Bio import SeqIO
 import ahocorasick
 import logging 
 
-def load_data_multi(fasta_file, kmer_file):
-	logging.info("Loading fasta file for Multi-Occuring Pre Min Set")
+def load_data(fasta_file, kmer_file):
+	logging.info("Loading fasta file")
 	fasta_list = list(SeqIO.parse(fasta_file,"fasta"))
 	logging.info("Loading kmer list")
 	kmer_list = [line.rstrip('\n') for line in open (kmer_file)]
 	return fasta_list, kmer_list
 
-def find_match_multi(line, A):
+def find_match(line, A):
 	found_kmers = []
 	for end_index, kmer in A.iter(line):
 		found_kmers.append(kmer)
 	return found_kmers
 
-def setup_automaton_multi(kmer_list):
+def setup_automaton(kmer_list):
 	logging.info("Setting up kmer lookup")
 	auto = ahocorasick.Automaton()
 	for seq in kmer_list:
@@ -24,15 +24,15 @@ def setup_automaton_multi(kmer_list):
 	logging.info("Completed set-up of kmer lookup")
 	return auto 
 
-def match_kmers_multi(fasta_list, kmer_auto):
+def match_kmers(fasta_list, kmer_auto):
 	logging.info("Writing output")
 	with open(output_file, "w") as f:
 		for record in fasta_list:
-			match = find_match_multi(str(record.seq), kmer_auto)
+			match = find_match(str(record.seq), kmer_auto)
 			if match:
 				line = str(match) + "\n"
 				f.write(line)
-	logging.info("Completed for Multi-Occuring Pre Min Set")
+	logging.info("Completed")
 
 if __name__ == '__main__':
 	fasta_file = "result_file.fasta"
@@ -41,6 +41,6 @@ if __name__ == '__main__':
 
 	logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 	
-	fasta_list, kmer_list = load_data_multi(fasta_file, kmer_file)
-	kmer_auto = setup_automaton_multi(kmer_list)
-	match_kmers_multi(fasta_list, kmer_auto)
+	fasta_list, kmer_list = load_data(fasta_file, kmer_file)
+	kmer_auto = setup_automaton(kmer_list)
+	match_kmers(fasta_list, kmer_auto)
