@@ -392,3 +392,4 @@ python U5.2_MinSet.py
 
 ---
 ## Citing Resources
+1. Chong, L.C.; Lim, W.L.; Ban, K.H.K.; Khan, A.M. An Alignment-Independent Approach for the Study of Viral Sequence Diversity at Any Given Rank of Taxonomy Lineage. Biology 2021, 10, 853. https://doi.org/10.3390/biology10090853
