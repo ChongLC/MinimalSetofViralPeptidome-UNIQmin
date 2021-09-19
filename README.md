@@ -13,8 +13,8 @@ Table of Contents
 ## Step by step of UNIQmin
 Please refer to the [PythonCode](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/tree/master/PythonCode) folder. 
 
-## Figure Summary
-<img src="Summary.png" width="640" height="1075">
+## Figure Scheme
+<img src="Scheme.png" width="640" height="1075">
 
 ---
 ## UNIQmin as a Pipeline
