@@ -6,7 +6,7 @@ Sequence variation among pathogens, even of a single amino acid, can expand thei
 Table of Contents
 ====================
 - [Step-by-step of UNIQmin](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/tree/master/PythonCode)
-- [Figure Summary](#figure-summary)
+- [Figure Scheme](#figure-scheme)
 - [UNIQmin as a Pipeline](#uniqmin-as-a-pipeline)
 - [Citing Resources](#citing-resources)
 
@@ -14,7 +14,7 @@ Table of Contents
 Please refer to the [PythonCode](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/tree/master/PythonCode) folder. 
 
 ## Figure Scheme
-<img src="Scheme.png" width="640" height="1075">
+<img src="Scheme.png" width="1204" height="676">
 
 ---
 ## UNIQmin as a Pipeline
