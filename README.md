@@ -11,7 +11,7 @@ Table of Contents
 - [UNIQmin as a Pipeline](#uniqmin-as-a-pipeline)
 - [Citing Resources](#citing-resources)
 
-## Step by step of UNIQmin
+## Step-by-step of UNIQmin
 Please refer to the [PythonCode](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/tree/master/PythonCode) folder. 
 
 ## Figure Scheme
