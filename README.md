@@ -12,7 +12,7 @@ Table of Contents
 - [Citing Resources](#citing-resources)
 
 ## Step-by-step of UNIQmin
-Please refer to the [PythonCode](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/tree/master/PythonCode) folder. 
+Please refer to the [PythonCode](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/tree/master/PythonScript) folder. 
 
 ## Figure Scheme
 ![Scheme1](https://user-images.githubusercontent.com/51225708/134200760-f70d72ee-0fac-4535-aa3e-61fd8dd1a69f.png)
