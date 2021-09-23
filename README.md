@@ -27,7 +27,7 @@ As visualised above, UNIQmin comprises of five steps with respective python scri
 #### Python Version
 `python UNIQmin.py -i exampleinput.fas -o example -k 9 -cpu 14`
 
-## UNIQmin as a Pipeline
+## UNIQmin as a Package
 
 #### Installation
 `pip install UNIQmin`
