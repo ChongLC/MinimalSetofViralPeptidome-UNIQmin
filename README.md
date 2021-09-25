@@ -1,9 +1,7 @@
 # **UNIQmin: An alignment-independent tool for the study of pathogen sequence diversity at any given rank of taxonomy lineage**
 
 [![DOI - 10.3390/biology10090853](https://img.shields.io/badge/DOI-10.3390%2Fbiology10090853-2ea44f)](https://doi.org/10.3390/biology10090853)
-[![ChongLC - MinimalSetofViralPeptidome-UNIQmin](https://img.shields.io/static/v1?label=ChongLC&message=UNIQmin&color=blue&logo=github)](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin)
-[![stars - MinimalSetofViralPeptidome-UNIQmin](https://img.shields.io/github/stars/ChongLC/MinimalSetofViralPeptidome-UNIQmin?style=social)](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin)
-[![forks - MinimalSetofViralPeptidome-UNIQmin](https://img.shields.io/github/forks/ChongLC/MinimalSetofViralPeptidome-UNIQmin?style=social)](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin)
+[![pypi - UNIQmin](https://img.shields.io/badge/dependency-UNIQmin-blue)](https://pypi.org/project/uniqmin/)
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
 
 ### Brief Description
