@@ -61,4 +61,4 @@ For example, UNIQmin tool is applied to generate a minimal set (example) with a 
 ---
 ## Found a bug?
 Or would like a feature added? Or maybe drop some feedback?
-Just [open a new issue](https://github.com/pendy05/Protocol-of-viral-diversity-dynamics/issues/new).
+Just [open a new issue](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/issues/new).
