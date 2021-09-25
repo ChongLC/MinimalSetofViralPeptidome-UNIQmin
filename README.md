@@ -15,6 +15,7 @@ Table of Contents
 - [Figure Scheme](#figure-scheme)
 - [UNIQmin as a Pipeline](#uniqmin-as-a-pipeline)
 - [Citing Resources](#citing-resources)
+- [Found a Bug](#found-a-bug)
 
 ## Step-by-step of UNIQmin
 Please refer to the [PythonScript](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/tree/master/PythonScript) folder. 
@@ -56,3 +57,8 @@ For example, UNIQmin tool is applied to generate a minimal set (example) with a 
 ---
 ### Citing Resources
 1. Chong, L.C.; Lim, W.L.; Ban, K.H.K.; Khan, A.M. An Alignment-Independent Approach for the Study of Viral Sequence Diversity at Any Given Rank of Taxonomy Lineage. Biology 2021, 10, 853. https://doi.org/10.3390/biology10090853
+
+---
+## Found a bug?
+Or would like a feature added? Or maybe drop some feedback?
+Just [open a new issue](https://github.com/pendy05/Protocol-of-viral-diversity-dynamics/issues/new).
