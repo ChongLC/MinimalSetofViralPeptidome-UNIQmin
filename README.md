@@ -28,31 +28,31 @@ Please refer to the [PythonCode](https://github.com/ChongLC/MinimalSetofViralPep
 #### Shell Version
 As visualised above, UNIQmin comprises of five steps with respective python scripts employed according to the order of step (server specs: Intel(R) Xeon(R) E5-2690 v2 @ 3.00GHz 40-core processors, 396 GB of RAM and 44 TB of local storage. The single pipeline shell script (UNIQmin.sh), sample input file (exampleinput.fas) and example output (exampleoutput.txt) are provided. 
 
-`UNIQmin.sh`
+`uniqmin.sh`
 
 #### Python Version
-`python UNIQmin.py -i exampleinput.fas -o example -k 9 -cpu 14`
+`python uniqmin.py -i exampleinput.fas -o example -k 9 -cpu 14`
 
 ## UNIQmin as a Package
 
 #### Installation
-`pip install UNIQmin`
+`pip install uniqmin`
 
 #### Usage
-`UNIQmin [-i INPUT] [-o OUTPUT] [-k [KMERLENGTH]] [-cpu [CPUSIZE]]`
+`uniqmin [-i INPUT] [-o OUTPUT] [-k [KMERLENGTH]] [-cpu [CPUSIZE]]`
 
 For example, UNIQmin tool is applied to generate a minimal set (example) with a sample input file (exampleinput.fas). A *k*-mer window size of nine (9; nonamer) is used with utilising 14-cores. 
 
-`UNIQmin -i exampleinput.fas -o example -k 9 -cpu 14`
+`uniqmin -i exampleinput.fas -o example -k 9 -cpu 14`
 
 #### Command-line Arguments
-| Argument 	| Parameter              | Type    	| Default 	| Description                                |           
-|----------	|----------------------- |---------	|---------- |--------------------------------------------|
-| -h       	| help                   | N/A     	| N/A     	| Show this help message and exit            |
-| -i       	| sequence input file    | String  	| N/A     	| Path of the input file (in FASTA format)   |
-| -o       	| output directory name  | String  	| N/A     	| Path of the output file to be created      |
-| -k        | *k*-mer window size    | Integer 	| 9       	| The length of *k*-mers to be used          |
-| -cpu      | cpu size               | Integer 	| 14       	| The number of CPU cores to be used         |
+| Argument 	| Parameter              | Type    	| Required | Default 	| Description                                |           
+|----------	|----------------------- |---------	|----------|----------|------------------------------------------  |
+| -h       	| help                   | N/A     	|FALSE	   | N/A     	| Show this help message and exit            |
+| -i       	| sequence input file    | String  	|TRUE	     | N/A     	| Path of the input file (in FASTA format)   |
+| -o       	| output directory name  | String  	|TRUE      | N/A     	| Path of the output file to be created      |
+| -k        | *k*-mer window size    | Integer 	|FALSE     | 9       	| The length of *k*-mers to be used          |
+| -cpu      | cpu size               | Integer 	|FALSE     | 14       | The number of CPU cores to be used         |
 
 ---
 ### Citing Resources
