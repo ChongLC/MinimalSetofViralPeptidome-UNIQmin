@@ -1,7 +1,7 @@
 # **UNIQmin: An alignment-independent tool for the study of pathogen sequence diversity at any given rank of taxonomy lineage**
 
 [![DOI - 10.3390/biology10090853](https://img.shields.io/badge/DOI-10.3390%2Fbiology10090853-2ea44f)](https://doi.org/10.3390/biology10090853)
-[![pypi - UNIQmin](https://img.shields.io/badge/dependency-UNIQmin-blue)](https://pypi.org/project/uniqmin/)
+![PyPI](https://img.shields.io/pypi/v/uniqmin?logo=pypi)
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
 
 ### Brief Description
