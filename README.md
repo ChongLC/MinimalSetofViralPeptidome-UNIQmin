@@ -2,6 +2,7 @@
 
 [![DOI - 10.3390/biology10090853](https://img.shields.io/badge/DOI-10.3390%2Fbiology10090853-2ea44f)](https://doi.org/10.3390/biology10090853)
 ![PyPI](https://img.shields.io/pypi/v/uniqmin?logo=pypi)
+[![GitHub tag](https://img.shields.io/github/tag/ChongLC/MinimalSetofViralPeptidome-UNIQmin)](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/releases/?include_prereleases&sort=semver "View GitHub releases")
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
 
 ### Brief Description
