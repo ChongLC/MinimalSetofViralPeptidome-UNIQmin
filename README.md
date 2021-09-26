@@ -39,7 +39,7 @@ As visualised above, UNIQmin comprises of five steps with respective python scri
 `pip install uniqmin`
 
 #### Usage
-`uniqmin [-i INPUT] [-o OUTPUT] [-k [KMERLENGTH]] [-cpu [CPUSIZE]]`
+`uniqmin [-h] [-i INPUT] [-o OUTPUT] [-k [KMERLENGTH]] [-cpu [CPUSIZE]]`
 
 For example, UNIQmin tool is applied to generate a minimal set (example) with a sample input file (exampleinput.fas). A *k*-mer window size of nine (9; nonamer) is used with utilising 14-cores. 
 
@@ -61,4 +61,5 @@ For example, UNIQmin tool is applied to generate a minimal set (example) with a 
 ---
 ## Found a bug?
 Or would like a feature added? Or maybe drop some feedback?
-Just [open a new issue](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/issues/new).
+Just [open a new issue](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/issues/new) or send an email to us (lichuinchong@gmail.com).
+
