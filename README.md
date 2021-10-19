@@ -15,6 +15,7 @@ Table of Contents
 - [Step-by-step of UNIQmin](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/tree/master/PythonCode)
 - [Figure Scheme](#figure-scheme)
 - [UNIQmin as a Pipeline](#uniqmin-as-a-pipeline)
+- [Generate a random protein sequence dataset](#generate-a-random-protein-sequence-dataset)
 - [Citing Resources](#citing-resources)
 - [Found a Bug](#found-a-bug)
 
@@ -69,6 +70,10 @@ uniqmin -i exampleinput.fas -o example -k 9 -cpu 14
 | -cpu      | cpu size               | Integer 	|FALSE     | 14       | The number of CPU cores to be used         |
 
 ---
+### Generate a random protein sequence dataset
+This section is particular for the Protocol paper. For the details of this section and the python script, please refer to the [rpseqgen] folder. 
+
+---
 ### Citing Resources
 * For original paper, please refer to our MDPI Biology paper: <br>
   Chong, L.C.; Lim, W.L.; Ban, K.H.K.; Khan, A.M. An Alignment-Independent Approach for the Study of Viral Sequence Diversity at Any Given Rank of Taxonomy Lineage. Biology 2021, 10, 853. https://doi.org/10.3390/biology10090853
@@ -77,4 +82,3 @@ uniqmin -i exampleinput.fas -o example -k 9 -cpu 14
 ## Found a bug?
 Or would like a feature added? Or maybe drop some feedback?
 Just [open a new issue](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/issues/new) or send an email to us (lichuinchong@gmail.com).
-
