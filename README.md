@@ -71,7 +71,7 @@ uniqmin -i exampleinput.fas -o example -k 9 -cpu 14
 
 ---
 ### Generate a random protein sequence dataset
-This section is particular for the Protocol paper. For the details of this section and the python script, please refer to the [rpseqgen] folder. 
+This section is particular for the Protocol paper. For the details of this section and the python script, please refer to the [rpseqgen](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/tree/master/rpseqgen) folder. 
 
 ---
 ### Citing Resources
