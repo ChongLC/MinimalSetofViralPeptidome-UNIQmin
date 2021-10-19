@@ -29,22 +29,35 @@ Please refer to the [PythonScript](https://github.com/ChongLC/MinimalSetofViralP
 #### Shell Version
 As visualised above, UNIQmin comprises of five steps with respective python scripts employed according to the order of step (server specs: Intel(R) Xeon(R) E5-2690 v2 @ 3.00GHz 40-core processors, 396 GB of RAM and 44 TB of local storage. The single pipeline shell script (UNIQmin.sh), sample input file (exampleinput.fas) and example output (exampleoutput.txt) are provided. 
 
-`uniqmin.sh`
+```
+uniqmin.sh
+```
 
 #### Python Version
-`python uniqmin.py -i exampleinput.fas -o example -k 9 -cpu 14`
+```
+python uniqmin.py -i exampleinput.fas -o example -k 9 -cpu 14
+```
 
 ## UNIQmin as a Package
 
 #### Installation
-`pip install uniqmin`
+* via pip <br>
+  ```
+  pip install uniqmin
+  ```
+* via package clone from GitHub repository
+  ```
+  git clone https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin.git
+  ```
 
 #### Usage
 `uniqmin [-h] [-i INPUT] [-o OUTPUT] [-k [KMERLENGTH]] [-cpu [CPUSIZE]]`
 
 For example, UNIQmin tool is applied to generate a minimal set (example) with a sample input file (exampleinput.fas). A *k*-mer window size of nine (9; nonamer) is used with utilising 14-cores. 
 
-`uniqmin -i exampleinput.fas -o example -k 9 -cpu 14`
+```
+uniqmin -i exampleinput.fas -o example -k 9 -cpu 14
+```
 
 #### Command-line Arguments
 | Argument 	| Parameter              | Type    	| Required | Default 	| Description                                |           
@@ -57,7 +70,8 @@ For example, UNIQmin tool is applied to generate a minimal set (example) with a 
 
 ---
 ### Citing Resources
-1. Chong, L.C.; Lim, W.L.; Ban, K.H.K.; Khan, A.M. An Alignment-Independent Approach for the Study of Viral Sequence Diversity at Any Given Rank of Taxonomy Lineage. Biology 2021, 10, 853. https://doi.org/10.3390/biology10090853
+* For original paper, please refer to our MDPI Biology paper: <br>
+  Chong, L.C.; Lim, W.L.; Ban, K.H.K.; Khan, A.M. An Alignment-Independent Approach for the Study of Viral Sequence Diversity at Any Given Rank of Taxonomy Lineage. Biology 2021, 10, 853. https://doi.org/10.3390/biology10090853
 
 ---
 ## Found a bug?
