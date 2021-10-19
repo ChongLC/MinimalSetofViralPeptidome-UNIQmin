@@ -51,7 +51,7 @@ python uniqmin.py -i exampleinput.fas -o example -k 9 -cpu 14
   ```
 
 #### Usage
-`uniqmin [-h] [-i INPUT] [-o OUTPUT] [-k [KMERLENGTH]] [-cpu [CPUSIZE]]`
+`uniqmin [-h] [-i INPUT] [-o OUTPUT] [-k KMERLENGTH] [-cpu CPUSIZE]`
 
 For example, UNIQmin tool is applied to generate a minimal set (example) with a sample input file (exampleinput.fas). A *k*-mer window size of nine (9; nonamer) is used with utilising 14-cores. 
 
