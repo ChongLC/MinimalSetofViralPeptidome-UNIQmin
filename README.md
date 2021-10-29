@@ -3,8 +3,11 @@
 [![DOI - 10.3390/biology10090853](https://img.shields.io/badge/DOI-10.3390%2Fbiology10090853-2ea44f)](https://doi.org/10.3390/biology10090853)
 [![PyPI](https://img.shields.io/pypi/v/uniqmin?logo=pypi)](https://pypi.org/project/uniqmin/)
 [![GitHub tag](https://img.shields.io/github/tag/ChongLC/MinimalSetofViralPeptidome-UNIQmin)](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/releases/?include_prereleases&sort=semver "View GitHub releases")
-![Visitor](https://visitor-badge.laobi.icu/badge?page_id=https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin)
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
+
+<!--
+![Visitor](https://visitor-badge.laobi.icu/badge?page_id=https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin)
+-->
 
 ### Brief Description
 Sequence variation among pathogens, even of a single amino acid, can expand their host repertoire or enhance the infection ability. Alignment independent approach represents an alternative approach to the study of pathogen diversity, which is devoid of the need for sequence conservation to perform comparative analyses. Herein, we present UNIQmin, a tool that utilises an alignment independent method to generate the minimal set of pathogen sequences, as a way to study their diversity, across any rank of taxonomic lineage. The minimal set refers to the smallest possible number of sequences required to capture the entire repertoire of pathogen peptidome diversity present in a sequence dataset.
