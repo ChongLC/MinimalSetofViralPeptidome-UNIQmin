@@ -6,10 +6,18 @@ Generation of the random protein sequence dataset may useful for many sequence a
 ---
 
 ### Usage
-`python randomGenerator.py [the path to the retrieved fasta sequence for amino acid composition] [the path to the output file] [sequence length for the generated dataset] [sequence number for the generated dataset]`
+`python randomGenerator.py [-h] [-[-o OUTPUT] [-l SEQLEN] [-n SEQNUM]`
 
-For example, rpseqgen tool is applied to generate a random protein sequence dataset `randomproteinseq.fasta` consisting of 1,000 sequences that with 1,000 amino acids long. The amino acid composition of the dataset generation is based on the retrieved dataset of all reported viral sequence (as of May 2021, from NCBI Entrez Protein Database) `allVirus080521.fasta`. <br> 
+For example, rpseqgen tool is applied to generate a random protein sequence dataset `randomproteinseq.fasta` consisting of 1,000 sequences that with 1,000 amino acids long. The provided amino acid composition of the dataset generation is based on the retrieved dataset of all reported viral sequence (as of May 2021, from NCBI Entrez Protein Database) `allVirus080521.fasta`. <br> 
 
 ```
-python randomGenerator.py allVirus080521.fasta randomproteinseq.fasta 1000 1000
+python randomGenerator.py -o randomproteinseq.fasta -l 1000 -n 1000
 ```
+
+#### Command-line Arguments
+| Argument | Parameter | Type    	| Required | Description                                |           
+|:--------:|-----------|---------	|:--------:|------------------------------------------  |
+| -h       | help      | N/A     	|FALSE	   | Show this help message and exit            |
+| -o       | output    | String  	|TRUE      | Path of the output file to be created      |
+| -l       | seqlen    | Integer 	|TRUE      | The length of protein sequences            |
+| -n       | seqnum    | Integer 	|TRUE      | The number of protein sequences            |
