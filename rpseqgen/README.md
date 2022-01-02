@@ -1,5 +1,5 @@
 # rpseqgen: A tool to generate random protein sequence dataset
-![Run in Google Colab](https://img.shields.io/badge/Colab-Run_in_Google_Colab-blue?logo=Google&logoColor=FDBA18) <br>
+[![Run in Google Colab](https://img.shields.io/badge/Colab-Run_in_Google_Colab-blue?logo=Google&logoColor=FDBA18)](https://colab.research.google.com/drive/1IwNPKaRKGgPzqiOBuEo8S0VbUpe3XqVh?usp=sharing) <br>
 
 Generation of the random protein sequence dataset may useful for many sequence analysis, in order to remove noise in the analysis. Herein, we would like to apply the same theory to UNIQmin and thus, this generator is built for the respective purpose. 
 
