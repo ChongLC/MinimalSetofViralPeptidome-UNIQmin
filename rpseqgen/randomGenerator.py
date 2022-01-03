@@ -26,7 +26,7 @@ if __name__ == '__main__':
     with open(args.output, 'w') as f:
         for i in range(seqnum):
             counter += 1
-            randomSeqList = ''.join(random.choices(aa_fullList, weights = [6.42, 5.51, 5.08, 5.01, 1.97, 3.96, 6.02, 6.76, 2.04, 6.28, 8.61, 5.93, 2.55, 3.77, 4.99, 6.85, 6.68, 1.76, 3.28, 6.34, 0.19], k=seqlen))
+            randomSeqList = ''.join(random.choices(aa_fullList, weights = [6.64, 4.22, 5.2, 5.04, 2.56, 3.72, 5.28, 6.2, 1.92, 5.55, 9.13, 5.86, 2.33, 4.45, 4.28, 6.7, 7.07, 1.35, 3.99, 7.34, 1.16], k=seqlen))
             random_list.append(randomSeqList)
             i+=1
             f.write(f">Sequence {counter}" + '\n' + randomSeqList + '\n')
