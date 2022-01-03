@@ -26,6 +26,7 @@ while(len(remain_kmer) != 0):
     
     matching_file = 'match/matching'+str(a)
     remain_kmer_file = 'match/remain_kmer'+str(a)
+    remain_Seq_copy = remain_Seq.copy()
     
     # save matching to file
     with open(matching_file, 'w') as f:
@@ -34,11 +35,11 @@ while(len(remain_kmer) != 0):
             y = find_matching(remain_Seq[index].seq, A)
             z = len(y)
             f.write(x + ';' + str(y) + ';' + str(z) + '\n')
-			if z == 0:
-                for i in range(len(remain_Seq_copy)):
-                    if remain_Seq_copy[i].id == x:
-                        del remain_Seq_copy[i]
-                        break                
+            if z == 0:
+                    for i in range(len(remain_Seq_copy)):
+                        if remain_Seq_copy[i].id == x:
+                            del remain_Seq_copy[i]
+                            break                
     
     remain_Seq = remain_Seq_copy.copy()
     
