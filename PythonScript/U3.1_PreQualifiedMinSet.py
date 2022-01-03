@@ -36,7 +36,7 @@ def match_kmers(fasta_list, kmer_auto):
 
 if __name__ == '__main__':
 
-    fasta_file = ""inputfile.fas""
+    fasta_file = "inputfile.fas"
     kmer_file = "seqSingleList.txt"
     output_file = "seqfileZ.txt"
 
