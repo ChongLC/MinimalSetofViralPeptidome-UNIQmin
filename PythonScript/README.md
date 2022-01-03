@@ -266,6 +266,12 @@ with open(result, "w") as f:
 
 #### Step 5 - Identification of the final minimal set of sequences
 Match between the remaining unique, multi-occurring *k*-mers of *B#* and the remaining sequence of *A#*, and subsequently, identify the sequence with the maximal *k*-mers coverage, which are then deposited into the earlier defined file *Z* (minimal set). The deposited sequences in file *Z* and their inherent *k*-mers are removed from file *A#* and file *B#*, respectively. This process is repeated until the *k*-mers in the file *B#* are exhausted. This step is carried out by use of the "U5.1_RemainingMinSet" and "U5.2_MinSet" scripts. The output of the sample input file (inputfile.fas) is provided as an example (exampleoutput.txt). 
+
+```
+#create a new directory for all the intermediate files (named it as `match`)
+mkdir match
+```
+
 ```
 from Bio import SeqIO
 import pandas as pd 
@@ -273,7 +279,6 @@ import ahocorasick as ahc
 
 remain_Seq = list(SeqIO.parse("remainingSeq.fasta","fasta"))
 remain_kmer = [line.rstrip('\n') for line in open ("remainingKmer.txt")]
-remain_Seq_copy = remain_Seq.copy()
 
 def make_automaton(kmer_list):
     A = ahc.Automaton()  
@@ -296,6 +301,7 @@ while(len(remain_kmer) != 0):
     
     matching_file = 'match/matching'+str(a)
     remain_kmer_file = 'match/remain_kmer'+str(a)
+    remain_Seq_copy = remain_Seq.copy()
     
     # save matching to file
     with open(matching_file, 'w') as f:
