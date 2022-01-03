@@ -1,6 +1,6 @@
 from Bio import SeqIO
 
-fileA = list(SeqIO.parse("cdhitCoronaviridae","fasta"))
+fileA = list(SeqIO.parse("inputfile.fas","fasta"))
 header_set = set(line.strip() for line in open("seqfileZ.txt"))
 remainingSeq = open("remainingSeq.fasta","w")
 
@@ -11,7 +11,7 @@ for seq_record in fileA:
 		remainingSeq.write(seq_record.format("fasta"))
 remainingSeq.close()
 
-fasta_file = "cdhitCoronaviridae" 
+fasta_file = "inputfile.fas" 
 wanted_file = "seqfileZ.txt" 
 result_file = "result_file.fasta" 
 
