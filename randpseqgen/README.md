@@ -19,5 +19,5 @@ python randpseqgen.py -o randomproteinseq.fasta -l 1000 -n 1000
 |:--------:|-----------|---------	|:--------:|-------------------------------------------------------  |
 | -h       | help      | N/A     	|FALSE	   | Show this help message and exit                         |
 | -o       | output    | String  	|TRUE      | Path of the output file to be created                   |
-| -l       | seqlen    | Integer 	|TRUE      | The length of random protein sequences                  |
+| -l       | seqlen    | Integer 	|TRUE      | The length of random protein sequences to be generated  |
 | -n       | seqnum    | Integer 	|TRUE      | The number of random protein sequences to be generated  |
