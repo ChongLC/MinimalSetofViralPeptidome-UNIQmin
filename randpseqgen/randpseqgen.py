@@ -8,8 +8,8 @@ import random
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-o', '--output',dest="output", help='Path of the output file to be created')
-    parser.add_argument('-l', '--seqlen', dest="seqlen", help='The length of protein sequences')
-    parser.add_argument('-n', '--seqnum', dest="seqnum", help='The number of protein sequences')
+    parser.add_argument('-l', '--seqlen', dest="seqlen", help='The length of random protein sequences to be generated')
+    parser.add_argument('-n', '--seqnum', dest="seqnum", help='The number of random protein sequences to be generated')
 
     return parser.parse_args()
 
