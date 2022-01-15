@@ -8,7 +8,7 @@ A random protein sequence dataset can be useful for various sequence analysis, i
 ### Usage
 `python randpseqgen.py [-h] [-[-o OUTPUT] [-l SEQLEN] [-n SEQNUM]`
 
-In the usage case below, the rpseqgen tool is applied to generate a random protein sequence dataset, named `randomproteinseq.fasta` consisting of 1,000 sequences of length 1,000 amino acids. The amino acid composition of the random sequences is based on all reported viral sequence retrieved from the NCBI Protein database (as of May 2021; `allVirus080521.fasta`). <br> 
+In the usage case below, the randpseqgen tool is applied to generate a random protein sequence dataset, named `randomproteinseq.fasta` consisting of 1,000 sequences of length 1,000 amino acids. The amino acid composition of the random sequences is based on all reported viral sequence retrieved from the NCBI Protein database (as of May 2021; `allVirus080521.fasta`). <br> 
 
 ```
 python randpseqgen.py -o randomproteinseq.fasta -l 1000 -n 1000
