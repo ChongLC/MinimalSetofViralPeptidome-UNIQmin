@@ -53,6 +53,16 @@ python uniqmin.py -i exampleinput.fas -o example -k 9 -cpu 14
   ```
   git clone https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin.git
   ```
+**Note for user who uses conda environment (*e.g.*: jupyter notebook):** <br>
+Before `pip` installing the package, run <br>
+```
+conda config --add channels conda-forge
+conda install pyahocorasick
+```
+... and restart the kernel to use the updated package. Then, run 
+```
+pip install uniqmin
+```
 
 #### Usage
 `uniqmin [-h] [-i INPUT] [-o OUTPUT] [-k KMERLENGTH] [-cpu CPUSIZE]`
