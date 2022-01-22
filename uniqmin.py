@@ -157,7 +157,7 @@ if __name__ == '__main__':
     for i in range(0,int(args.cpusize)):
         futures.append(pool.submit(generate_kmers, i * perCPUSize, (i+1) * perCPUSize))
 
-    time.sleep(5)
+    time.sleep(60)
 
     #--------#
     # U2.1   #
