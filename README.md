@@ -31,7 +31,7 @@ Please refer to the [PythonScript](https://github.com/ChongLC/MinimalSetofViralP
 ## UNIQmin as a Pipeline
 
 #### Shell Version
-As visualised above, UNIQmin comprises of five steps with respective python scripts employed according to the order of step (server specs: Intel(R) Xeon(R) E5-2690 v2 @ 3.00GHz 40-core processors, 396 GB of RAM and 44 TB of local storage. The single pipeline shell script (UNIQmin.sh), sample input file (exampleinput.fas) and example output (exampleoutput.txt) are provided. 
+As visualised above, UNIQmin comprises of five steps with respective python scripts employed according to the order of step (server specs: Intel(R) Xeon(R) E5-2690 v2 @ 3.00GHz 40-core processors, 396 GB of RAM and 44 TB of local storage. The single pipeline shell script (UNIQmin.sh), sample input file (exampleinput.fas) and example output (exampleoutput.fasta) are provided. 
 
 ```
 uniqmin.sh
