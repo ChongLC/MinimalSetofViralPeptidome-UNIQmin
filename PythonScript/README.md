@@ -265,7 +265,7 @@ with open(result, "w") as f:
 ```
 
 #### Step 5 - Identification of the final minimal set of sequences
-Match between the remaining unique, multi-occurring *k*-mers of *B#* and the remaining sequence of *A#*, and subsequently, identify the sequence with the maximal *k*-mers coverage, which are then deposited into the earlier defined file *Z* (minimal set). The deposited sequences in file *Z* and their inherent *k*-mers are removed from file *A#* and file *B#*, respectively. This process is repeated until the *k*-mers in the file *B#* are exhausted. This step is carried out by use of the "U5.1_RemainingMinSet" and "U5.2_MinSet" scripts. The output of the sample input file (inputfile.fas) is provided as an example (exampleoutput.txt). 
+Match between the remaining unique, multi-occurring *k*-mers of *B#* and the remaining sequence of *A#*, and subsequently, identify the sequence with the maximal *k*-mers coverage, which are then deposited into the earlier defined file *Z* (minimal set). The deposited sequences in file *Z* and their inherent *k*-mers are removed from file *A#* and file *B#*, respectively. This process is repeated until the *k*-mers in the file *B#* are exhausted. This step is carried out by use of the "U5.1_RemainingMinSet" and "U5.2_MinSet" scripts. The output of the sample input file (exampleinput.fas) is provided as an example (exampleoutput.fasta). 
 
 ```
 #create a new directory for all the intermediate files (named it as `match`)
