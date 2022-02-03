@@ -26,7 +26,8 @@ Table of Contents
 Please refer to the [PythonScript](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/tree/master/PythonScript) folder. 
 
 ## Figure Scheme
-![uniqminScheme](https://user-images.githubusercontent.com/51225708/152305099-07359d4a-3edf-48c4-806a-e0b3e5e225fd.png)
+![uniqminScheme](https://user-images.githubusercontent.com/51225708/152393757-5be032bc-c17a-49b2-b9b7-aa3637aed1e1.png)
+
 
 ## UNIQmin as a Pipeline
 
