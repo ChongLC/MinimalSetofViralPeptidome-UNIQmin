@@ -1,6 +1,6 @@
 import argparse, sys
 from Bio import SeqIO
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, wait
 import math
 import pandas as pd
 import ahocorasick as ahc
@@ -157,7 +157,8 @@ if __name__ == '__main__':
     for i in range(0,int(args.cpusize)):
         futures.append(pool.submit(generate_kmers, i * perCPUSize, (i+1) * perCPUSize))
 
-    time.sleep(60)
+    wait(futures)
+    #time.sleep(60)
 
     #--------#
     # U2.1   #
