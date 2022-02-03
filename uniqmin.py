@@ -302,8 +302,8 @@ if __name__ == '__main__':
     #--------#
     # U5.1   #
     #--------#
-
-    os.system(f"cp {args.output}/seqfileZ.txt {args.output}/fileZ.txt")
+    os.mkdir(args.output+'/minimalSet')
+    os.system(f"cp {args.output}/seqfileZ.txt {args.output}/minimalSet/fileZ.txt")
     os.mkdir(args.output+'/match')
 
     remaining = RemainingMinSet()
@@ -341,7 +341,7 @@ if __name__ == '__main__':
         df['matched_kmer'] = df['matched_kmer'].str.replace(r"\[|\]|'","")
         
         # save highest count id to file
-        fileZ = open(args.output +'/fileZ.txt', 'a')
+        fileZ = open(args.output +'/minimalSet/fileZ.txt', 'a')
         fileZ.write(df['sequence_id'].iloc[0] + '\n')
         
         # remove highest count kmer
@@ -358,10 +358,9 @@ if __name__ == '__main__':
     #--------#
     # U5.2   #
     #--------#
-
     fasta_file =  args.input # Input fasta file
-    wanted_file = args.output +"/fileZ.txt" # Input interesting sequence IDs, one per line
-    result_file = args.output +"/FileZ.fasta" # Output fasta file
+    wanted_file = args.output +"/minimalSet/fileZ.txt" # Input interesting sequence IDs, one per line
+    result_file = args.output +"/minimalSet/fileZ.fasta" # Output fasta file
 
     wanted = set()
     with open (wanted_file) as f: 
