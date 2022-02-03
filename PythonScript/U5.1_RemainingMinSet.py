@@ -48,7 +48,7 @@ while(len(remain_kmer) != 0):
     df['matched_kmer'] = df['matched_kmer'].str.replace(r"\[|\]|'","")
     
     # save highest count id to file
-    fileZ = open('fileZ.txt', 'a')
+    fileZ = open('minimalSet/fileZ.txt', 'a')
     fileZ.write(df['sequence_id'].iloc[0] + '\n')
     
     # remove highest count kmer

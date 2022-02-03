@@ -1,3 +1,5 @@
+[To the main README >](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/blob/master/README.md)
+
 # **Step-by-step of UNIQmin**
 
 Table of Contents
@@ -268,6 +270,14 @@ with open(result, "w") as f:
 Match between the remaining unique, multi-occurring *k*-mers of *B#* and the remaining sequence of *A#*, and subsequently, identify the sequence with the maximal *k*-mers coverage, which are then deposited into the earlier defined file *Z* (minimal set). The deposited sequences in file *Z* and their inherent *k*-mers are removed from file *A#* and file *B#*, respectively. This process is repeated until the *k*-mers in the file *B#* are exhausted. This step is carried out by use of the "U5.1_RemainingMinSet" and "U5.2_MinSet" scripts. The output of the sample input file (exampleinput.fas) is provided as an example (exampleoutput.fasta). 
 
 ```
+#create a new directory for all the final output files (named it as `minimalSet`)
+mkdir minimalSet
+
+#copy the pre-qualified minimal set into a new file (named as `fileZ.txt`) that will be appended later, resulting a final minimal set
+cp seqfileZ.txt minimalSet/fileZ.txt 
+```
+
+```
 #create a new directory for all the intermediate files (named it as `match`)
 mkdir match
 ```
@@ -321,7 +331,7 @@ while(len(remain_kmer) != 0):
     df = pd.read_csv(matching_file, delimiter=';', names=['sequence_id', 'matched_kmer', 'count']).sort_values(by='count',ascending=False, kind='mergesort')
     df['matched_kmer'] = df['matched_kmer'].str.replace(r"\[|\]|'","")
     
-    fileZ = open('fileZ.txt', 'a') # file Z is an example for output (exampleoutput.txt)
+    fileZ = open('minimalSet/fileZ.txt', 'a') # file Z is an example for output (exampleoutput.txt)
     fileZ.write(df['sequence_id'].iloc[0] + '\n')
     
     kmer_to_remove = df['matched_kmer'].iloc[0].split(', ')
@@ -337,8 +347,8 @@ while(len(remain_kmer) != 0):
 from Bio import SeqIO
 
 fasta_file = "inputfile.fas" # Input fasta file
-wanted_file = "fileZ.txt" # Input interesting sequence IDs, one per line
-result_file = "FileZ.fasta" # Output fasta file
+wanted_file = "minimalSet/fileZ.txt" # Input interesting sequence IDs, one per line
+result_file = "minimalSet/fileZ.fasta" # Output fasta file
 
 wanted = set()
 with open (wanted_file) as f: 
@@ -353,6 +363,9 @@ with open (result_file, "w") as f:
     if seq.id in wanted: 
       SeqIO.write([seq], f, "fasta")
 ```
+
+[To the main README >](https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin/blob/master/README.md)
+
 ---
 ## Figure Summary
 <img src="Summary.png" width="640" height="1075">
