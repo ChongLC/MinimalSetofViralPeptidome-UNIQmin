@@ -1,4 +1,4 @@
-# randomizer: A tool to generate a random protein sequence dataset
+# v_randomizer: A tool to generate a random viral protein sequence dataset
 [![Run in Google Colab](https://img.shields.io/badge/Colab-Run_in_Google_Colab-blue?logo=Google&logoColor=FDBA18)](https://colab.research.google.com/drive/1IwNPKaRKGgPzqiOBuEo8S0VbUpe3XqVh?usp=sharing) <br>
 
 A random protein sequence dataset can be useful for various sequence analysis, in order to evaluate and correct the analysis for the background noise. Herein, we offer a tool that can generate a dataset of random protein sequences. 
