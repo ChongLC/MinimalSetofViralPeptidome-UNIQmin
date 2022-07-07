@@ -5,6 +5,7 @@ import math
 import pandas as pd
 import ahocorasick as ahc
 import logging
+#logging.basicConfig(level = logging.INFO)
 import ast
 import itertools
 import os
@@ -18,7 +19,7 @@ def get_args():
     parser.add_argument('-i', '--input', dest="input", help='Path of the input file (in FASTA format)')
     parser.add_argument('-o', '--output',dest="output", help='Path of the output file to be created')
     parser.add_argument('-k', '--kmer', dest="kmerlength", help='The length of k-mers to be used', default=9, nargs='?')
-    parser.add_argument('-cpu', '--cpusize', dest="cpusize", help='The number of CPU cores to be used', default=14,nargs='?')
+    parser.add_argument('-cpu', '--cpusize', dest="cpusize", help='The number of CPU cores to be used', default=14, nargs='?')
 
     return parser.parse_args()
 
@@ -26,7 +27,7 @@ def get_args():
 # U1     #
 #--------#
 
-def generate_kmers(start, end):
+def generate_kmers(fileA, args, file_id, start, end):
     logging.info("Loading fasta file to generate kmer list")
     for record in fileA[start:end]:
         nr_sequence = record.seq
@@ -69,7 +70,7 @@ class PreQualifiedMinSet:
         logging.info("Completed set-up of kmer lookup")
         return auto
 
-    def match_kmers(self, fasta_list, kmer_auto):
+    def match_kmers(self, output_file, fasta_list, kmer_auto):
         logging.info("Writing output")
         with open(output_file,"w") as f:
             for record in fasta_list:
@@ -107,7 +108,7 @@ class MultiOccurringPreMinSet:
         logging.info("Completed set-up of kmer lookup")
         return auto 
 
-    def match_kmers_multi(self, fasta_list, kmer_auto):
+    def match_kmers_multi(self, output_file, fasta_list, kmer_auto):
         logging.info("Writing output")
         with open(output_file, "w") as f:
             for record in fasta_list:
@@ -136,8 +137,7 @@ class RemainingMinSet:
             found_kmers.append(kmer)
         return found_kmers
 
-if __name__ == '__main__':
-
+def main():
     args = get_args()
     
     #--------#
@@ -145,6 +145,7 @@ if __name__ == '__main__':
     #--------#
     
     os.mkdir(args.output)
+    logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
     
     fileA = list(SeqIO.parse(args.input,"fasta"))
     file_id = args.output +"/Output_kmers.txt"
@@ -155,7 +156,7 @@ if __name__ == '__main__':
     futures = []
     perCPUSize = math.ceil(n/int(args.cpusize))
     for i in range(0,int(args.cpusize)):
-        futures.append(pool.submit(generate_kmers, i * perCPUSize, (i+1) * perCPUSize))
+        futures.append(pool.submit(generate_kmers, fileA, args, file_id, i * perCPUSize, (i+1) * perCPUSize))
 
     wait(futures)
     #time.sleep(60)
@@ -204,7 +205,7 @@ if __name__ == '__main__':
 
     fasta_list, kmer_list = preQualified.load_data(fasta_file, kmer_file)
     kmer_auto = preQualified.setup_automaton(kmer_list)
-    preQualified.match_kmers(fasta_list, kmer_auto)
+    preQualified.match_kmers(output_file, fasta_list, kmer_auto)
 
     #--------#
     # U3.2   #
@@ -264,7 +265,7 @@ if __name__ == '__main__':
 
     fasta_list, kmer_list = multiOccuring.load_data_multi(fasta_file, kmer_file)
     kmer_auto = multiOccuring.setup_automaton_multi(kmer_list)
-    multiOccuring.match_kmers_multi(fasta_list, kmer_auto)
+    multiOccuring.match_kmers_multi(output_file, fasta_list, kmer_auto)
 
     #--------#
     # U4.3   #
@@ -376,3 +377,7 @@ if __name__ == '__main__':
                 SeqIO.write([seq], f, "fasta")
     
     logging.info("Successfully generated final minimal set")
+
+if __name__ == '__main__':
+
+    main()

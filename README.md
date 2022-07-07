@@ -9,9 +9,6 @@
 ![Visitor](https://visitor-badge.laobi.icu/badge?page_id=https://github.com/ChongLC/MinimalSetofViralPeptidome-UNIQmin)
 -->
 
-Note: UNIQmin v1.2.1 in PyPI is the same version as the v1.2.0 in GitHub.
-<br>
-
 ### Brief Description
 Sequence variation among pathogens, even of a single amino acid, can expand their host repertoire or enhance the infection ability. Alignment independent approach represents an alternative approach to the study of pathogen diversity, which is devoid of the need for sequence conservation to perform comparative analyses. Herein, we present UNIQmin, a tool that utilises an alignment independent method to generate the minimal set of pathogen sequences, as a way to study their diversity, across any rank of taxonomic lineage. The minimal set refers to the smallest possible number of sequences required to capture the entire repertoire of pathogen peptidome diversity present in a sequence dataset.
 
@@ -69,6 +66,11 @@ python uniqmin.py -i exampleinput.fas -o example -k 9 -cpu 14
   ```
   pip install uniqmin
   ```
+  
+#### Upgrade installed version
+```
+pip install uniqmin --upgrade
+```
 
 #### Usage
 `uniqmin [-h] [-i INPUT] [-o OUTPUT] [-k KMERLENGTH] [-cpu CPUSIZE]`
