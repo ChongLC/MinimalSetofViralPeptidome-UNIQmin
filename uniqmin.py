@@ -24,6 +24,7 @@ def get_args():
     parser.add_argument('-k', '--kmer', dest="kmerlength", help='The length of k-mers to be used', default=9, nargs='?')
     parser.add_argument('-cpu', '--cpusize', dest="cpusize", help='The number of CPU cores to be used', default=14,
                         nargs='?')
+    parser.add_argument('-t', '--thread', dest="threads", help="The number of threads to be used", default=6, type=int)
 
     return parser.parse_args()
 
@@ -371,7 +372,7 @@ def main():
         # Put queue for threading
         for index in range(len(remain_Seq)):
             remain_Seq_queue.put(remain_Seq[index])
-        for i in range(6):
+        for i in range(args.threads):
             thread = ThreadPool(i, remain_Seq_queue, remain_Seq_copy, remaining, A, lines)
             thread.start()
             threads.append(thread)
