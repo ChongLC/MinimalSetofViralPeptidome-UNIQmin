@@ -1,13 +1,12 @@
 import argparse
 # logging.basicConfig(level = logging.INFO)
 import ast
+import glob
 import itertools
 import logging
-import math
 import os
 import queue
 import threading
-from concurrent.futures import ProcessPoolExecutor, wait
 
 import ahocorasick as ahc
 import pandas as pd
@@ -33,20 +32,23 @@ def get_args():
 # U1     #
 # --------#
 
-def generate_kmers(fileA, args, file_id, start, end):
-    logging.info("Loading fasta file to generate kmer list")
-    for record in fileA[start:end]:
-        nr_sequence = record.seq
-        seq_len = len(nr_sequence)
-        kmer = int(args.kmerlength)
-        count = 0
-        temp = []
-        for seq in list(range(seq_len - (kmer - 1))):
-            count += 1
-            my_kmer = (nr_sequence[seq:seq + kmer])
-            temp.append(str(my_kmer))
-        with open(file_id, 'a') as f:
-            f.writelines("%s\n" % kmer for kmer in temp)
+def generate_kmers(thread_id, seq_queue: queue.Queue, kmerlength, path):
+    while True:
+        try:
+            for record in seq_queue.get_nowait():
+                nr_sequence = record.seq
+                seq_len = len(nr_sequence)
+                kmer = int(kmerlength)
+                count = 0
+                temp = []
+                for seq in list(range(seq_len - (kmer - 1))):
+                    count += 1
+                    my_kmer = (nr_sequence[seq:seq + kmer])
+                    temp.append(str(my_kmer)+'\n')
+                open(path + f'/kmers_{thread_id}.tmp', 'a').writelines(temp)
+        except queue.Empty:
+            break
+    return True
 
 
 # --------#
@@ -168,7 +170,7 @@ def proccess_match(remain_seq_queue: queue.Queue, remain_Seq_copy, remaining, A,
 # --------#
 # Thread pool  #
 # --------#
-class ThreadPool(threading.Thread):
+class FindMatchPool(threading.Thread):
     def __init__(self, thread_id, remain_seq_queue, remain_Seq_copy, remaining, A, lines: list):
         super().__init__()
         self.thread_id = thread_id
@@ -180,6 +182,31 @@ class ThreadPool(threading.Thread):
 
     def run(self):
         proccess_match(self.remain_seq_queue, self.remain_Seq_copy, self.remaining, self.A, self.lines)
+
+
+class GenerateKmersPool(threading.Thread):
+    def __init__(self, thread_id, seq_queue, kmerlength, path):
+        super().__init__()
+        self.thread_id = thread_id
+        self.seq_queue = seq_queue
+        self.kmerlength = kmerlength
+        self.path = path
+
+    def run(self):
+        generate_kmers(self.thread_id, self.seq_queue, self.kmerlength, self.path)
+
+
+def copy_file(source, dest, buffer_size=10 * 1024 * 1024):
+    """
+    Copy a file from source to dest. source and dest
+    must be file-like objects, i.e. any object with a read or
+    write method, like for example StringIO.
+    """
+    while True:
+        copy_buffer = source.read(buffer_size)
+        if not copy_buffer:
+            break
+        dest.write(copy_buffer)
 
 
 def main():
@@ -197,13 +224,30 @@ def main():
     open(file_id, 'a').close()
 
     n = len(fileA)
-    pool = ProcessPoolExecutor(int(args.cpusize))
-    futures = []
-    perCPUSize = math.ceil(n / int(args.cpusize))
-    for i in range(0, int(args.cpusize)):
-        futures.append(pool.submit(generate_kmers, fileA, args, file_id, i * perCPUSize, (i + 1) * perCPUSize))
+    chunk_size = 2000
+    start = 0
+    stop = chunk_size
+    threads = list()
+    logging.info("Loading fasta file to generate kmer list")
+    seq_queue = queue.Queue()
+    while start < n + 1:
+        seq_queue.put(fileA[start:stop])
+        start += chunk_size
+        stop = min(n + 1, stop + chunk_size)
+    for i in range(args.threads):
+        thread = GenerateKmersPool(i, seq_queue, args.kmerlength, args.output)
+        thread.start()
+        threads.append(thread)
 
-    wait(futures)
+    for t in threads:
+        t.join()
+    # Combining kmers temps into a single file
+    files = glob.glob(args.output + '/kmers_*.tmp')
+    for file in files:
+        with open(file, 'r') as src, open(file_id, 'a+') as dst:
+            copy_file(src, dst)
+            dst.write('\n')
+        os.remove(file)
     # time.sleep(60)
 
     # --------#
@@ -375,7 +419,7 @@ def main():
         for index in range(len(remain_Seq)):
             remain_Seq_queue.put(remain_Seq[index])
         for i in range(args.threads):
-            thread = ThreadPool(i, remain_Seq_queue, remain_Seq_copy, remaining, A, lines)
+            thread = FindMatchPool(i, remain_Seq_queue, remain_Seq_copy, remaining, A, lines)
             thread.start()
             threads.append(thread)
         for t in threads:
