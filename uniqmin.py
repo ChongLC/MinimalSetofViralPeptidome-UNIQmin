@@ -279,10 +279,12 @@ def main():
                 wanted.add(line)
 
     fasta_sequences = SeqIO.parse(open(fasta_file), 'fasta')
+    seq_list = []
+    for seq in fasta_sequences:
+        if seq.id in wanted:
+            seq_list.append(seq)
     with open(result_file, "w") as f:
-        for seq in fasta_sequences:
-            if seq.id in wanted:
-                SeqIO.write([seq], f, "fasta")
+        SeqIO.write(seq_list, f, "fasta")
 
     # --------#
     # U4.1   #
@@ -323,27 +325,27 @@ def main():
             listOfLines.append(line)
 
     full_list = list(itertools.chain(*listOfLines))
-
-    with open(args.output + "/fullList.txt", 'w') as f:
-        for item in full_list:
-            f.write("%s\n" % item)
-
     lines_seen = set()
-    nr_lines = open(args.output + "/Clean_lines.txt", "w")
-    for line in open(args.output + "/fullList.txt", "r"):
-        if line not in lines_seen:
-            nr_lines.write(line)
-            lines_seen.add(line)
-    nr_lines.close()
+    lines_list = list()
+    with open(args.output + "/fullList.txt", 'w') as f:
+        f.write('\n'.join(i for i in full_list))
 
-    a = open(args.output + "/nr_more1List.txt", 'r')
-    b = open(args.output + "/Clean_lines.txt", 'r')
-    result = args.output + "/remainingKmer.txt"
+    with open(args.output + "/fullList.txt", 'r') as f:
+        for line in f.readlines():
+            if line not in lines_seen:
+                lines_list.append(line)
+                lines_seen.add(line)
 
-    remain_kmer_list = list(set(a) - set(b))
-    with open(result, "w") as f:
+    with open(args.output + "/Clean_lines.txt", "w") as nr_lines:
+        nr_lines.write(''.join(i for i in lines_list))
+
+    with open(args.output + "/nr_more1List.txt", 'r') as a, open(args.output + "/Clean_lines.txt", 'r') as b, open(
+            args.output + "/remainingKmer.txt", 'w') as result:
+        remain_kmer_list = list(set(a) - set(b))
+        result_kmer_list = list()
         for i in remain_kmer_list:
-            f.write(i)
+            result_kmer_list.append(i)
+        result.write(''.join(i for i in result_kmer_list))
 
     # --------#
     # U5.1   #
