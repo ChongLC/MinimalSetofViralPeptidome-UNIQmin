@@ -1,5 +1,4 @@
 import argparse
-# logging.basicConfig(level = logging.INFO)
 import ast
 import glob
 import itertools
@@ -21,8 +20,6 @@ def get_args():
     parser.add_argument('-i', '--input', dest="input", help='Path of the input file (in FASTA format)')
     parser.add_argument('-o', '--output', dest="output", help='Path of the output file to be created')
     parser.add_argument('-k', '--kmer', dest="kmerlength", help='The length of k-mers to be used', default=9, nargs='?')
-    parser.add_argument('-cpu', '--cpusize', dest="cpusize", help='The number of CPU cores to be used', default=14,
-                        nargs='?')
     parser.add_argument('-t', '--thread', dest="threads", help="The number of threads to be used", default=6, type=int)
 
     return parser.parse_args()
