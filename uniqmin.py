@@ -6,27 +6,28 @@ import logging
 import os
 import queue
 import threading
-
 import ahocorasick as ahc
 import pandas as pd
 from Bio import SeqIO
 
 
 # --------------#
-# Argument     #
+# Argument      #
 # --------------#
 def get_args():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog = 'UNIQmin',
+                    description = 'An alignment-independent tool for the study of pathogen sequence diversity'
+                    )
     parser.add_argument('-i', '--input', dest="input", help='Path of the input file (in FASTA format)')
     parser.add_argument('-o', '--output', dest="output", help='Path of the output file to be created')
     parser.add_argument('-k', '--kmer', dest="kmerlength", help='The length of k-mers to be used', default=9, nargs='?')
-    parser.add_argument('-t', '--thread', dest="threads", help="The number of threads to be used", default=6, type=int)
+    parser.add_argument('-t', '--thread', dest="threads", help="The number of threads to be used", default=4, type=int)
 
     return parser.parse_args()
 
 
 # --------#
-# U1     #
+# U1      #
 # --------#
 
 def generate_kmers(thread_id, seq_queue: queue.Queue, kmerlength, path):
@@ -49,7 +50,7 @@ def generate_kmers(thread_id, seq_queue: queue.Queue, kmerlength, path):
 
 
 # --------#
-# U3.1   #
+# U3.1    #
 # --------#
 
 class PreQualifiedMinSet:
@@ -77,7 +78,7 @@ class PreQualifiedMinSet:
         return auto
 
     def match_kmers(self, output_file, fasta_list, kmer_auto):
-        logging.info("Writing output")
+        logging.info("Writing output (pre-qualified set)")
         with open(output_file, "w") as f:
             for record in fasta_list:
                 match = self.__find_match(str(record.seq), kmer_auto)
@@ -88,7 +89,7 @@ class PreQualifiedMinSet:
 
 
 # --------#
-# U4.2   #
+# U4.2    #
 # --------#
 
 class MultiOccurringPreMinSet:
@@ -96,7 +97,7 @@ class MultiOccurringPreMinSet:
     def load_data_multi(self, fasta_file, kmer_file):
         logging.info("Loading fasta file for minimal set from multi-occuring kmer list")
         fasta_list = list(SeqIO.parse(fasta_file, "fasta"))
-        logging.info("Loading kmer list")
+        logging.info("Loading multi-occuring kmer list")
         kmer_list = [line.rstrip('\n') for line in open(kmer_file)]
         return fasta_list, kmer_list
 
@@ -107,16 +108,16 @@ class MultiOccurringPreMinSet:
         return found_kmers
 
     def setup_automaton_multi(self, kmer_list):
-        logging.info("Setting up kmer lookup")
+        logging.info("Setting up multi-occuring kmer lookup")
         auto = ahc.Automaton()
         for seq in kmer_list:
             auto.add_word(seq, seq)
         auto.make_automaton()
-        logging.info("Completed set-up of kmer lookup")
+        logging.info("Completed set-up of multi-occuring kmer lookup")
         return auto
 
     def match_kmers_multi(self, output_file, fasta_list, kmer_auto):
-        logging.info("Writing output")
+        logging.info("Writing output (pre-qualified-matched kmers")
         with open(output_file, "w") as f:
             for record in fasta_list:
                 match = self.__find_match_multi(str(record.seq), kmer_auto)
@@ -127,7 +128,7 @@ class MultiOccurringPreMinSet:
 
 
 # --------#
-# U5.1   #
+# U5.1    #
 # --------#
 
 class RemainingMinSet:
@@ -164,9 +165,9 @@ def proccess_match(remain_seq_queue: queue.Queue, remain_Seq_copy, remaining, A,
     return True
 
 
-# --------#
+# -------------#
 # Thread pool  #
-# --------#
+# -------------#
 class FindMatchPool(threading.Thread):
     def __init__(self, thread_id, remain_seq_queue, remain_Seq_copy, remaining, A, lines: list):
         super().__init__()
@@ -210,7 +211,7 @@ def main():
     args = get_args()
 
     # --------#
-    # U1     #
+    # U1      #
     # --------#
 
     os.mkdir(args.output)
@@ -245,10 +246,9 @@ def main():
             copy_file(src, dst)
             dst.write('\n')
         os.remove(file)
-    # time.sleep(60)
 
     # --------#
-    # U2.1   #
+    # U2.1    #
     # --------#
 
     # frequency count
@@ -268,7 +268,7 @@ def main():
     singleList.to_csv(args.output + "/seqSingleList.txt", index=False, header=False)
 
     # --------#
-    # U2.2   #
+    # U2.2    #
     # --------#
 
     more1 = kmers['freq'] != 1
@@ -278,7 +278,7 @@ def main():
     more1List.to_csv(args.output + "/seqmore1List.txt", index=False, header=False)
 
     # --------#
-    # U3.1   #
+    # U3.1    #
     # --------#
 
     fasta_file = args.input
@@ -294,7 +294,7 @@ def main():
     preQualified.match_kmers(output_file, fasta_list, kmer_auto)
 
     # --------#
-    # U3.2   #
+    # U3.2    #
     # --------#
 
     fileA = list(SeqIO.parse(args.input, "fasta"))
@@ -328,7 +328,7 @@ def main():
         SeqIO.write(seq_list, f, "fasta")
 
     # --------#
-    # U4.1   #
+    # U4.1    #
     # --------#
 
     lines_seen = set()
@@ -340,7 +340,7 @@ def main():
     outfile.close()
 
     # --------#
-    # U4.2   #
+    # U4.2    #
     # --------#
 
     fasta_file = args.output + "/result_file.fasta"
@@ -356,7 +356,7 @@ def main():
     multiOccuring.match_kmers_multi(output_file, fasta_list, kmer_auto)
 
     # --------#
-    # U4.3   #
+    # U4.3    #
     # --------#
 
     listOfLines = list()
@@ -389,7 +389,7 @@ def main():
         result.write(''.join(i for i in result_kmer_list))
 
     # --------#
-    # U5.1   #
+    # U5.1    #
     # --------#
     os.mkdir(args.output + '/minimalSet')
     os.system(f"cp {args.output}/seqfileZ.txt {args.output}/minimalSet/fileZ.txt")
@@ -447,7 +447,7 @@ def main():
         a = a + 1
 
     # --------#
-    # U5.2   #
+    # U5.2    #
     # --------#
     fasta_file = args.input  # Input fasta file
     wanted_file = args.output + "/minimalSet/fileZ.txt"  # Input interesting sequence IDs, one per line
