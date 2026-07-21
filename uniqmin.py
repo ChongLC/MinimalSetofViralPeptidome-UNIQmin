@@ -95,9 +95,9 @@ class PreQualifiedMinSet:
 class MultiOccurringPreMinSet:
 
     def load_data_multi(self, fasta_file, kmer_file):
-        logging.info("Loading fasta file for minimal set from multi-occuring kmer list")
+        logging.info("Loading fasta file for minimal set from multi-occurring kmer list")
         fasta_list = list(SeqIO.parse(fasta_file, "fasta"))
-        logging.info("Loading multi-occuring kmer list")
+        logging.info("Loading multi-occurring kmer list")
         kmer_list = [line.rstrip('\n') for line in open(kmer_file)]
         return fasta_list, kmer_list
 
@@ -108,12 +108,12 @@ class MultiOccurringPreMinSet:
         return found_kmers
 
     def setup_automaton_multi(self, kmer_list):
-        logging.info("Setting up multi-occuring kmer lookup")
+        logging.info("Setting up multi-occurring kmer lookup")
         auto = ahc.Automaton()
         for seq in kmer_list:
             auto.add_word(seq, seq)
         auto.make_automaton()
-        logging.info("Completed set-up of multi-occuring kmer lookup")
+        logging.info("Completed set-up of multi-occurring kmer lookup")
         return auto
 
     def match_kmers_multi(self, output_file, fasta_list, kmer_auto):
@@ -124,7 +124,7 @@ class MultiOccurringPreMinSet:
                 if match:
                     line = str(match) + "\n"
                     f.write(line)
-        logging.info("Completed determining the multi-occuring kmers that matched the pre-qualified minimal set")
+        logging.info("Completed determining the multi-occurring kmers that matched the pre-qualified minimal set")
 
 
 # --------#
@@ -349,11 +349,11 @@ def main():
 
     logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
-    multiOccuring = MultiOccurringPreMinSet()
+    multiOccurring = MultiOccurringPreMinSet()
 
-    fasta_list, kmer_list = multiOccuring.load_data_multi(fasta_file, kmer_file)
-    kmer_auto = multiOccuring.setup_automaton_multi(kmer_list)
-    multiOccuring.match_kmers_multi(output_file, fasta_list, kmer_auto)
+    fasta_list, kmer_list = multiOccurring.load_data_multi(fasta_file, kmer_file)
+    kmer_auto = multiOccurring.setup_automaton_multi(kmer_list)
+    multiOccurring.match_kmers_multi(output_file, fasta_list, kmer_auto)
 
     # --------#
     # U4.3    #
